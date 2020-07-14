@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf96302bd1f0507e9809bec16574621d",
+    "revision": "70fd7fbd179ed14473591dd151056a70",
     "url": "/noosphere/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/noosphere/static/css/2.2d17f65d.chunk.css"
   },
   {
-    "revision": "1b6447f5341431586239",
+    "revision": "d21b26b076979859e0be",
     "url": "/noosphere/static/css/main.fbe00f30.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/noosphere/static/js/2.4b8aa8d5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1b6447f5341431586239",
-    "url": "/noosphere/static/js/main.fad46a19.chunk.js"
+    "revision": "d21b26b076979859e0be",
+    "url": "/noosphere/static/js/main.853f6a7b.chunk.js"
   },
   {
     "revision": "73dcd02a44786692a705",
