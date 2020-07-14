@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
 export function Matrix(props) {
   const classes = useStyles();
   const [profileToken, setProfileToken] = useGlobal('profileToken')
-  const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
-  const [worlds, setWorlds] = useState([])
+  const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')  
+  const [sector, setSector] = useGlobal('sector')
+  const [levels, setLevels] = useState([])
+  const [gifs, setGifs] = useGlobal('gifs')
   
 
   function createMatrix () {
@@ -43,7 +45,7 @@ export function Matrix(props) {
         "sheets": [
           {
             "properties": {
-              "title": "worlds"
+              "title": "LeveLs"
             }
           }
         ],
@@ -98,13 +100,16 @@ export function Matrix(props) {
           "includeGridData": true,
         }).then(function(response) {
                     // Handle the results here (response.result has the parsed body).
-          let cards = response.result.sheets[0].data[0].rowData.reduce((accumulator, currentValue) => {
-            if (currentValue.values[0].formattedValue !== undefined) {
-              accumulator.push({id: currentValue.values[0].formattedValue, name: currentValue.values[1].formattedValue})              
-            }
-            return accumulator
-          }, []);
-          setWorlds(cards)
+          if (response.result.sheets[0].data[0].rowData) {
+            let cards = response.result.sheets[0].data[0].rowData.reduce((accumulator, currentValue) => {
+              if (currentValue.values[0] && currentValue.values[0].formattedValue &&
+                  currentValue.values[1] && currentValue.values[1].formattedValue) {
+                accumulator.push({id: currentValue.values[0].formattedValue, name: currentValue.values[1].formattedValue})              
+              }
+              return accumulator
+            }, []);
+            setLevels(cards)
+          }
         },
         function(err) { console.error("Execute error", err); });
       })
@@ -113,14 +118,14 @@ export function Matrix(props) {
     
   }, []); // Only re-run the effect if count changes
 
-  function Worlds(props) {
-    if (props.worlds.length > 0) {
+  function LeveLs(props) {
+    if (props.levels.length > 0) {
       return (<Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2}>
-            {worlds.map((card) => (
+            {levels.map((card) => (
               <Grid key={card.id} item>
-                <Card className={classes.paper}>
+                <Card className={classes.paper} onClick={() => { setGifs([]); setSector('level') }}>
                 <CardHeader
                   avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -141,7 +146,7 @@ export function Matrix(props) {
   }
   
   return (<>
-    <Worlds worlds={worlds} />
+    <LeveLs levels={levels} />
     <Add/>
   </>)
 }

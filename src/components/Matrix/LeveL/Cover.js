@@ -34,7 +34,9 @@ export function Cover (props) {
   const [title, setTitle] = useState('')
   const [characters, setCharacters] = useState([])
   const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
-  const [tableRange, setTableRange] = useGlobal('tableRange')
+  const [tableRange, setTableRange] = useGlobal('tableRange')  
+  const [gifs, setGifs] = useGlobal('gifs')
+  const [LeveLUuid, setLeveLUuid] = useGlobal('LeveLUuid')
 
   const handleTitleSave = () => {
     console.log(title, tableRange)
@@ -43,7 +45,7 @@ export function Cover (props) {
       "resource": {
         "valueInputOption": "RAW",
         "data": [{
-          "range": "B" + tableRange,
+          "range": "LeveLs!B" + tableRange,
           "values": [[title]]
         }]
       }
@@ -51,6 +53,23 @@ export function Cover (props) {
       console.log("Response", response);
     },
     function(err) { console.error("Execute error", err); })
+  }
+
+  const handleMomentsSave = () => {
+    console.log(' moments save : ' + [JSON.stringify(gifs)] )
+    return window.gapi.client.sheets.spreadsheets.values.append({
+      "spreadsheetId": "1jIQl3dnSPNPT6gWalvhdzNMP2qEQ_pIHWuwggc64fKc",
+      "range": LeveLUuid + "!A1",
+      "insertDataOption": "OVERWRITE",
+      "valueInputOption": "RAW",
+      "resource": {
+        "values": [[JSON.stringify(gifs)]]
+      }
+    }).then(function(response) {
+      // Handle the results here (response.result has the parsed body).
+      console.log("Response", response);
+    },
+    function(err) { console.error("Execute error", err); });    
   }
 
   const handleCardHeaderEdit = () => {
@@ -76,6 +95,7 @@ export function Cover (props) {
         { edit === 'header' && 
           <ClickAwayListener onClickAway={() => {
             handleTitleSave()
+            handleMomentsSave()
             setEdit(false)
 
           }} >
@@ -88,7 +108,6 @@ export function Cover (props) {
               }            
             title={<TextField label="Title" onChange={(event) => setTitle(event.target.value)} value={title}></TextField>}
               subheader={
-                
                 <Autocomplete
                   multiple
                   id="tags-filled"

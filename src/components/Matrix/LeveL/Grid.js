@@ -14,8 +14,10 @@ const SortableGallery = SortableContainer(({ items }) => (
 
 export function Grid (props) {  
   const [gifs, setGifs] = useGlobal('gifs')
+  
   const moments = gifs.map((src, idx) => {
     return {
+      key: idx.toString(),
       src: src,
       width: 4,
       height: 4

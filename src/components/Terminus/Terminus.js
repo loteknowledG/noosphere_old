@@ -2,7 +2,7 @@ import React, { useState, useGlobal} from 'reactn'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, TextField, Toolbar, Typography } from '@material-ui/core'
 import clsx from 'clsx';
-import { ChevronLeft, ChevronRight, CubeUnfolded, FormatTitle, HeadLightbulbOutline, Menu, MessageTextOutline, Rss,  } from 'mdi-material-ui';
+import { ChevronLeft, ChevronRight, CubeUnfolded, FormatTitle, HeadLightbulbOutline, Menu, MessageTextOutline, Rss, Store } from 'mdi-material-ui';
 import { Login } from './Login/'
 import { Syndicate } from '../Syndicate'
 import { Matrix } from '../Matrix/'

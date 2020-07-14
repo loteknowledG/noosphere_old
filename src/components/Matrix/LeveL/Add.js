@@ -1,8 +1,12 @@
 
 import React, {useState, useGlobal } from 'reactn'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Fab, Slide, TextField, TextareaAutosize,  useMediaQuery } from '@material-ui/core'
-import { Plus } from 'mdi-material-ui'
+import { withStyles } from '@material-ui/core/styles';
+import { Button, Dialog, Fab, IconButton, Link, TextareaAutosize, Typography } from '@material-ui/core'
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import { Plus, Close } from 'mdi-material-ui'
 import { uuid } from '../../Utility/uuid'
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +25,19 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   }
 }))
+
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
    /*--,                              
   '  .' \            ,---,      ,---, 
  /  ;    '.        ,---.'|    ,---.'| 
@@ -40,45 +57,8 @@ export function Add (props) {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('')
 
-  function authenticate() {
-    return window.gapi.auth2.getAuthInstance()
-        .signIn({scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets"})
-        .then(function() { console.log("Sign-in successful"); },
-              function(err) { console.error("Error signing in", err); });
-  }
-  // function loadClient() {
-  //   window.gapi.client.setApiKey("YOUR_API_KEY");
-  //   return window.gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
-  //       .then(function() { console.log("GAPI client loaded for API"); },
-  //             function(err) { console.error("Error loading GAPI client for API", err); });
-  // }
-  // Make sure the client is loaded and sign-in is complete before calling this method.
-  function materialize() {
-    // window.gapi.client.load("https://content.googleapis.com/discovery/v1/apis/sheets/v4/rest")
-    // .then(() => {
-    //   return window.gapi.client.sheets.spreadsheets.values.batchUpdate({
-    //     "spreadsheetId": spreadsheetId,
-    //     "resource": {
-    //       "data": [
-    //         {
-    //           "values": [
-    //             [
-    //               "hello"
-    //             ]
-    //           ],
-    //           "range": "A1"
-    //         }
-    //       ],
-    //       "valueInputOption": "RAW"
-    //     }
-    //   })
-    //       .then(function(response) {
-    //               // Handle the results here (response.result has the parsed body).
-    //               console.log("Response", response);
-    //             },
-    //             function(err) { console.error("Execute error", err); });
-    // })
-  }/*
+  
+  /*
  _     _  _    _|_ _ 
 (/_>< (/_(_ |_| |_(/_
 */window.gapi.load("client:auth2", function() {
@@ -101,6 +81,7 @@ export function Add (props) {
 }
 
 
+
 function AddDialog (props) {
   const { onClose, value: valueProp, open, ...other } = props
   const [value, setValue] = useState(valueProp)
@@ -116,39 +97,138 @@ function AddDialog (props) {
     setValue(event.target.value);
   };
 
-  const handleMaterialize = () => {   
+  const handleClean = () => {
+    var textFile = null,
+    makeTextFile = function (text) {
+      var data = new Blob([text], {type: 'text/plain'});
+  
+      // If we are replacing a previously generated file we need to
+      // manually revoke the object URL to avoid memory leaks.
+      if (textFile !== null) {
+        window.URL.revokeObjectURL(textFile);
+      }
+  
+      textFile = window.URL.createObjectURL(data);
+  
+      return textFile;
+    };
+
     if (value) { 
       let gifs = value.split(',')
                       .filter(gif => gif.startsWith('["https://lh3'))
                       .map(gif => gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm,""))
+                      var link = document.getElementById('downloadlink');
+      link.href = makeTextFile(gifs);
+      link.style.display = 'block';
+    }
+  }
+
+  const handleMaterialize = () => {   
+    if (value) { 
+      let gifs = []
+      if (value.indexOf('[') !== -1) {
+        gifs = value.split(',')
+                    .filter(gif => gif.startsWith('["https://lh3'))
+                    .map(gif => gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm,""))
+      } else {
+        gifs = value.split(',')
+      }            
       setGifs(gifs);          
       setSector('level')                
-      setLeveLUuid(uuid())
-      handleUuidSheetInsert()
+      let levelUuid = uuid()
+      setLeveLUuid(levelUuid)
+      handleUuidSheetAppend(levelUuid)
+      handleLeveLSheetCreate(levelUuid)
       onClose()
     }
   };
 
-  const handleUuidSheetInsert = () => {
+  const handleUuidSheetAppend = (levelUuid) => {
     return window.gapi.client.sheets.spreadsheets.values.append({
       "spreadsheetId": spreadsheetId,
-      "range": "A1",
+      "range": "LeveLs!A1",
       "insertDataOption": "INSERT_ROWS",
       "valueInputOption": "RAW",      
       "resource": {
-        "values": [[uuid()]],
+        "values": [[levelUuid]],
         "majorDimension": "ROWS"
       }
-    }).then(function(response) { // Handle the results here (response.result has the parsed body).
-      console.log(response)
-      let tableRange = response.result.tableRange.split(':')[1]
-      // console.log(tableRange)
-      console.log((Number(tableRange.slice(1)) + 1))
-      setTableRange((Number(tableRange.slice(1)) + 1))
+    }).then((response) => { // Handle the results here (response.result has the parsed body).
+      let tableRange = 0;
+      if (response.result.tableRange) {
+        console.log('tableRange: ', response.result.tableRange)
+        tableRange = response.result.tableRange.split(':')[1]
+        if (response.result.tableRange) {
+          setTableRange((Number(tableRange.slice(1)) + 1))
+        } else {
+          setTableRange(1)
+        }
+      } else {
+        setTableRange(1)
+      }
     },
-    function(err) { console.error("Execute error", err); })
+    function(err) { console.error("Execute error", err); }).then((response) => {
+      createLeveL(levelUuid)
+    })
   } 
 
+  const handleLeveLSheetCreate = (levelUuid) => {
+    return window.gapi.client.sheets.spreadsheets.batchUpdate({
+      "spreadsheetId": "1jIQl3dnSPNPT6gWalvhdzNMP2qEQ_pIHWuwggc64fKc",
+      "resource": {
+        "requests": [
+          {
+            "addSheet": {
+              "properties": {
+                "title": levelUuid
+              }
+            }
+          }
+        ]
+      }
+    }).then(function(response) {
+      // Handle the results here (response.result has the parsed body).
+      console.log("Response", response);
+
+    },
+    function(err) { console.error("Execute error", err); });
+  }
+
+  const DialogTitle = withStyles(styles)((props) => {
+    const { children, classes, onClose, ...other } = props;
+    return (
+      <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <Typography variant="h6">{children}</Typography>
+        {onClose ? (
+          <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+            <Close />
+          </IconButton>
+        ) : null}
+      </MuiDialogTitle>
+    );
+  });
+  
+  const DialogContent = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+    },
+  }))(MuiDialogContent);
+  
+  const DialogActions = withStyles((theme) => ({
+    root: {
+      margin: 0,
+      padding: theme.spacing(1),
+    },
+  }))(MuiDialogActions);
+
+  const createLeveL = (levelUuid) => {
+    return window.gapi.client.sheets.spreadsheets.create({
+      properties: {
+        title: levelUuid
+      }
+    }).then((response) => {
+    });
+  }
 
 
   return (
@@ -160,9 +240,10 @@ function AddDialog (props) {
       onEntering={() => {}}
       aria-labelledby="confirmation-dialog-title"
       open={open}
+      onClose={() => onClose()}
       {...other}
     >
-      <DialogTitle id="confirmation-dialog-title">Matter Realize</DialogTitle>
+      <DialogTitle id="confirmation-dialog-title" onClose={() => onClose()}>Matter Realize</DialogTitle>
       <DialogContent dividers>
       <TextareaAutosize
         label='copy paste fractal matrix'
@@ -175,12 +256,14 @@ function AddDialog (props) {
         className={classes.textareaAutosize} />
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={() => onClose() } color="primary">
-          Cancel
+        <Button onClick={() => { handleClean()} } color="primary">
+          Clean
         </Button>
         <Button onClick={() => { handleMaterialize() }} color="primary">
           Materialize
         </Button>
+        <Link download="info.txt" id="downloadlink" style={{display: "none"}}>download</Link>
+        {/* <a download="info.txt" id="downloadlink" style="display: none">Download</a> */}
       </DialogActions>
     </Dialog>
   )

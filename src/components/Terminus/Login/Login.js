@@ -45,7 +45,6 @@ export function Login(props) {
                 let auth2 = window.gapi.auth2.getAuthInstance();
                 console.log("is signed in", auth2.isSignedIn.get())
                 console.log(window.gapi.client)
-
         },
         function(err) { console.error("Error loading GAPI client for API", err); });
     }/*
@@ -58,7 +57,7 @@ export function Login(props) {
         console.log(profileToken)
         return (
             <>
-                <Avatar src={(profileToken.Pt && profileToken.Pt.QK) || (profileToken.Tt && profileToken.Tt.SK)} onClick={ onClick} /> 
+                <Avatar src={(profileToken.Pt && profileToken.Pt.QK) || (profileToken.Tt && profileToken.Tt.SK) || (profileToken.Qt && profileToken.Qt.MK)} onClick={ onClick} /> 
                 <Popover            
                     open={open}
                     anchorEl={anchorEl}
