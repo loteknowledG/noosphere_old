@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "70fd7fbd179ed14473591dd151056a70",
+    "revision": "91e204bb01c10e5647ef97cfca687505",
     "url": "/noosphere/index.html"
   },
   {
