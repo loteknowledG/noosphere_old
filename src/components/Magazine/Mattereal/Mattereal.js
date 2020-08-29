@@ -110,8 +110,7 @@ export function Mattereal(props) {
             </Card>
             </motion.div> 
           </Cookie>
-        </WhoIsNext>
-        
+        </WhoIsNext>        
       </Grid>
     </>
   )

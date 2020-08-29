@@ -38,25 +38,25 @@ export function Syndicate(props) {
   const classes = useStyles()
 
   function list() {
-    if (window.gapi.client.drive) {
-      return window.gapi.client.drive.files.list({})
-        .then(function(response) {
-          // Handle the results here (response.result has the parsed body).
-          let matrix = response.result.files.find(file => {
-            return file.name === '23407 matrix'                      
-          })
-          // 23407 matrix found
-          if (matrix) {
-            return matrix
-          } else { // create 23407
+    // if (window.gapi.client.drive) {
+    //   return window.gapi.client.drive.files.list({})
+    //     .then(function(response) {
+    //       // Handle the results here (response.result has the parsed body).
+    //       let matrix = response.result.files.find(file => {
+    //         return file.name === '23407 matrix'                      
+    //       })
+    //       // 23407 matrix found
+    //       if (matrix) {
+    //         return matrix
+    //       } else { // create 23407
   
-          }
-          console.log(matrix)
-        },
-        function(err) { console.error("Execute error", err) })
-    } else {
-      return []
-    }
+    //       }
+    //       console.log(matrix)
+    //     },
+    //     function(err) { console.error("Execute error", err) })
+    // } else {
+    //   return []
+    // }
   }/*
    _     _  _    _|_ _ 
   (/_>< (/_(_ |_| |_(/_

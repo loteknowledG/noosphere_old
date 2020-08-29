@@ -1,4 +1,5 @@
 import React, { useState, useGlobal} from 'reactn'
+import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, TextField, Toolbar, Typography } from '@material-ui/core'
 import clsx from 'clsx';
@@ -8,6 +9,10 @@ import { Syndicate } from '../Syndicate'
 import { Matrix } from '../Matrix/'
 import { Note } from '../Note'
 import { LeveL } from '../Matrix/LeveL/LeveL'
+import { Scenario } from '../Matrix/Scenario/Scenario'
+import { MiniDrawer } from '../MiniDrawer'
+import { Link as RouterLink } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -91,133 +96,145 @@ const useStyles = makeStyles((theme) => ({
   },  
 }))
 
-function MiniDrawer() {
-  const classes = useStyles()
-  const theme = useTheme()
-  const [open, setOpen] = useState(false)  
-  const [sector, setSector] = useGlobal('sector');
-  const [profileToken, setProfileToken] = useGlobal('profileToken')
-  const handleDrawerOpen = () => { setOpen(true) }
-  const handleDrawerClose = () => { setOpen(false) }
+function ListItemLink(props) {
+  const { icon, primary, to } = props;
 
-  function Options() {
-    if (profileToken) {
-      return (<>
-        <List>
-          <ListItem button key='matrix' onClick={() => setSector('matrix')}>
-            <ListItemIcon><CubeUnfolded/></ListItemIcon>
-            <ListItemText primary="Matrix" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button key='message' onClick={() => setSector('message')}>
-            <ListItemIcon><MessageTextOutline /></ListItemIcon>
-            <ListItemText primary="Messages" />
-          </ListItem>
-        </List>  
-        <List>
-          <ListItem button key='note' onClick={() => setSector('note')}>
-            <ListItemIcon><HeadLightbulbOutline /></ListItemIcon>
-            <ListItemText primary="Notes" />
-          </ListItem>
-        </List>  
-        <Divider />
-        <List>
-          <ListItem button key='syndicate' onClick={() => setSector('syndicate')}>
-            <ListItemIcon><Rss/></ListItemIcon>
-            <ListItemText primary="Syndicate" />
-          </ListItem>
-        </List>        
-      </>)
-    }
-    return <></>;
-  }
+  const renderLink = React.useMemo(
+    () => React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
+    [to],
+  );
 
-  function LeveLOptions() {
-    if (profileToken) {
-      return (<>
-        <List>
-          <ListItem >
-            <ListItemIcon><FormatTitle/></ListItemIcon>
-            <TextField id="title" label="Title" />
-          </ListItem>
-        </List>
-      </>)
-    }
-    return <></>;
-  }/*
-   _     _  _    _|_ _ 
-  (/_>< (/_(_ |_| |_(/_
-*/return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="primary"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <Menu />
-          </IconButton>
-          <Login />
-          :   :
-          <Typography
-              className={classes.brandText}
-              color="primary">    
-              888b    |   ,88~~\     ,88~~\                    888                                <br/> 
-              |Y88b   |  d888   \   d888   \   d88~\ 888-~88e  888-~88e  e88~~8e  888-~\  e88~~8e <br/>
-              | Y88b  | 88888    | 88888    | C888   888  888b 888  888 d888  88b 888    d888  88b<br/>
-              |  Y88b | 88888    | 88888    |  Y88b  888  8888 888  888 8888__888 888    8888__888<br/>
-              |   Y88b|  Y888   /   Y888   /    888D 888  888P 888  888 Y888    , 888    Y888    ,<br/>
-              |    Y888   `88__/     `88__/   \_88P  888-_88"  888  888  "88___/  888     "88___/ <br/>
-              |                                      888<br/>                      
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
-          </IconButton>
-        </div>
-        <Divider />
-        <div className={classes.spacer} />
-        <Divider />
-        <Options />
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />       
-          {sector === 'matrix' && <Matrix />}               
-          {sector === 'note' && <Note />}  
-          {sector === 'syndicate' && <Syndicate />}  
-          {sector === 'level' && <LeveL /> }   
-      </main>
-    </div>
+  return (
+    <li>
+      <ListItem button component={renderLink}>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItem>
+    </li>
   );
 }
+
+ListItemLink.propTypes = {
+  icon: PropTypes.element,
+  primary: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};
+
+// function MiniDrawer() {
+//   const classes = useStyles()
+//   const theme = useTheme()
+//   const [open, setOpen] = useState(false)  
+//   const [sector, setSector] = useGlobal('sector');
+//   const [profileToken, setProfileToken] = useGlobal('profileToken')
+//   const handleDrawerOpen = () => { setOpen(true) }
+//   const handleDrawerClose = () => { setOpen(false) }
+
+//   function Options() {
+//     return (<>
+//       <List>
+//         <ListItemLink to="/matrix" primary="Matrix" icon={<CubeUnfolded />} />          
+//       </List>
+//       <Divider />
+//       <List>
+//         <ListItemLink to="/message" primary="Message" icon={<MessageTextOutline />} />          
+//       </List>  
+//       <List>
+//         <ListItemLink to="/note" primary="Note" icon={<HeadLightbulbOutline />} />           
+//       </List>  
+//       <Divider />
+//       <List>
+//         <ListItemLink to="/store" primary="Store" icon={<Store />} /> 
+//       </List>
+//       <List>
+//         <ListItemLink to="/syndicate" primary="Syndicate" icon={<Syndicate />} /> 
+//       </List>        
+//     </>)
+//   }
+
+//   function LeveLOptions() {
+//     if (profileToken) {
+//       return (<>
+//         <List>
+//           <ListItem >
+//             <ListItemIcon><FormatTitle/></ListItemIcon>
+//             <TextField id="title" label="Title" />
+//           </ListItem>
+//         </List>
+//       </>)
+//     }
+//     return <></>;
+//   }
+
+//   return (
+//     <div className={classes.root}>
+//       <CssBaseline />
+//       <AppBar
+//         position="fixed"
+//         className={clsx(classes.appBar, {
+//           [classes.appBarShift]: open,
+//         })}
+//       >
+//         <Toolbar>
+//           <IconButton
+//             color="primary"
+//             aria-label="open drawer"
+//             onClick={handleDrawerOpen}
+//             edge="start"
+//             className={clsx(classes.menuButton, {
+//               [classes.hide]: open,
+//             })}
+//           >
+//             <Menu />
+//           </IconButton>
+//           <Login />
+//           :   :
+//           <Typography
+//               className={classes.brandText}
+//               color="primary">    
+//               888b    |   ,88~~\     ,88~~\                    888                                <br/> 
+//               |Y88b   |  d888   \   d888   \   d88~\ 888-~88e  888-~88e  e88~~8e  888-~\  e88~~8e <br/>
+//               | Y88b  | 88888    | 88888    | C888   888  888b 888  888 d888  88b 888    d888  88b<br/>
+//               |  Y88b | 88888    | 88888    |  Y88b  888  8888 888  888 8888__888 888    8888__888<br/>
+//               |   Y88b|  Y888   /   Y888   /    888D 888  888P 888  888 Y888    , 888    Y888    ,<br/>
+//               |    Y888   `88__/     `88__/   \_88P  888-_88"  888  888  "88___/  888     "88___/ <br/>
+//               |                                      888<br/>                      
+//           </Typography>
+//         </Toolbar>
+//       </AppBar>
+//       <Drawer
+//         variant="permanent"
+//         className={clsx(classes.drawer, {
+//           [classes.drawerOpen]: open,
+//           [classes.drawerClose]: !open,
+//         })}
+//         classes={{
+//           paper: clsx({
+//             [classes.drawerOpen]: open,
+//             [classes.drawerClose]: !open,
+//           }),
+//         }}
+//       >
+//         <div className={classes.toolbar}>
+//           <IconButton onClick={handleDrawerClose}>
+//             {theme.direction === 'rtl' ? <ChevronRight /> : <ChevronLeft />}
+//           </IconButton>
+//         </div>
+//         <Divider />
+//         <div className={classes.spacer} />
+//         <Divider />
+//         <Options />
+//       </Drawer>
+//       <main className={classes.content}>
+//         <div className={classes.toolbar} />       
+//           {sector === 'matrix' && <Matrix />}               
+//           {sector === 'note' && <Note />}  
+//           {sector === 'syndicate' && <Syndicate />}  
+//           {sector === 'level' && <LeveL />} 
+//           {/* {sector === 'scenario' && <Scenario />}    */}
+//       </main>
+//     </div>
+//   );
+// }
 
 export function Terminus(props) {
     return (

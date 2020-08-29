@@ -13,19 +13,22 @@ export function Account(props) {
     const [profileToken, setProfileToken] = useGlobal('profileToken')    
     const classes = useStyles()
     useEffect(() => {
+        const abortController = new AbortController()
+        const signal = abortController.signal
         if (profileToken) {
-            fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${profileToken.tokenId}`)
+            fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${profileToken.tokenId}`, { signal: signal })
                 .then((response) => {
                     return response.json();
                 })
                 .then((myJson) => {
                     console.log(myJson);
                 })
+            return function cleanup() {
+                abortController.abort();
+            };    
         }        
-    })/*
-    _     _  _    _|_ _ 
-   (/_>< (/_(_ |_| |_(/_
-  */return (
+    })
+    return (
         <>
             <Grid container spacing={3}>
                 <Grid item xs={5}>     

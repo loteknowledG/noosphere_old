@@ -87,7 +87,6 @@ function AddDialog (props) {
   const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
   const [tableRange, setTableRange] = useGlobal('tableRange')
   
-  
 
   const change = (event) => {
     setValue(event.target.value);
@@ -241,7 +240,7 @@ function AddDialog (props) {
     >
       <DialogTitle id="confirmation-dialog-title" onClose={() => onClose()}>Matter Realize</DialogTitle>
       <DialogContent dividers>
-        <Dropzone onClose={() => onClose()}/>
+        <Dropzone />
         {/* <TextareaAutosize
           label='copy paste fractal matrix'
           rowsMin={17}          

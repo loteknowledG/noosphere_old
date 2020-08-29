@@ -33,7 +33,7 @@ export function Login(props) {
 
     function authenticate() {        
         return window.gapi.auth2.getAuthInstance()
-            .signIn({scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets"})
+            .signIn({scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.apps.readonly https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/drive.readonly"})
             .then(function(response) { setProfileToken(response); console.log("Sign-in successful"); },
                   function(err) { console.error("Error signing in", err); });
     }
@@ -51,7 +51,7 @@ export function Login(props) {
     _     _  _    _|_ _ 
    (/_>< (/_(_ |_| |_(/_
   */window.gapi.load("client:auth2", function() {
-        window.gapi.auth2.init({client_id: "524121216771-vv0e5evrv7k59esgvp181p4tmqbvuvii.apps.googleusercontent.com"});
+        window.gapi.auth2.init({client_id: "951030999356-u51qqgcjepmp5d7vnc3ne0vkttnsqq60.apps.googleusercontent.com"});
     })
     if (profileToken) {
         console.log(profileToken)
