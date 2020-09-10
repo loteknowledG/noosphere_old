@@ -47,12 +47,12 @@ export function Login(props) {
                 console.log(window.gapi.client)
         },
         function(err) { console.error("Error loading GAPI client for API", err); });
-    }/*
-    _     _  _    _|_ _ 
-   (/_>< (/_(_ |_| |_(/_
-  */window.gapi.load("client:auth2", function() {
-        window.gapi.auth2.init({client_id: "951030999356-u51qqgcjepmp5d7vnc3ne0vkttnsqq60.apps.googleusercontent.com"});
-    })
+    }
+    if (window.gapi) {
+        window.gapi.load("client:auth2", function() {
+            window.gapi.auth2.init({client_id: "951030999356-u51qqgcjepmp5d7vnc3ne0vkttnsqq60.apps.googleusercontent.com"});
+        })
+    }
     if (profileToken) {
         console.log(profileToken)
         return (

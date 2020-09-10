@@ -1,7 +1,6 @@
 import React, { useState, useGlobal } from 'reactn'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, CardHeader, IconButton, Slider } from '@material-ui/core'
-import Icon from '@mdi/react'
 import { Tag } from './Tag'
 import { Toilet } from 'mdi-material-ui'
 

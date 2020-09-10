@@ -38,9 +38,13 @@ export function Matrix(props) {
   const [sector, setSector] = useGlobal('sector')
   const [levels, setLevels] = useState([])
   const [gifs, setGifs] = useGlobal('gifs')
+  const [matrix, setMatrix] = useGlobal('matrix')
   
-  
+  if (matrix === undefined) {
+    setMatrix([])
+  }
 
+  console.log(matrix)
   // function createMatrix () {
   //   console.log('create matrix')
   //   return window.gapi.client.sheets.spreadsheets.create({
@@ -160,7 +164,7 @@ export function Matrix(props) {
   // execute()
   // authenticate().then(loadClient).then(execute())
 
-  function LeveLs(props) {
+  function Scenarios(props) {
     if (props.levels.length > 0) {
       return (<Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
@@ -188,7 +192,8 @@ export function Matrix(props) {
   }
   
   return (<>
-    <LeveLs levels={levels} />
+    <MiniDrawer />
+    <Scenarios levels={levels} />
     <Add/>
   </>)
 }

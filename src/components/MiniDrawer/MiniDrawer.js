@@ -121,6 +121,7 @@ export function MiniDrawer() {
   const [open, setOpen] = useState(false)  
   const handleDrawerOpen = () => { setOpen(true) }
   const handleDrawerClose = () => { setOpen(false) }
+  const [menuHeading, setMenuHeading] = useState('')
 
   function Options() {
     return (<>
@@ -139,7 +140,7 @@ export function MiniDrawer() {
         <ListItemLink to="/store" primary="Store" icon={<Store />} /> 
       </List>
       <List>
-        <ListItemLink to="/syndicate" primary="Syndicate" icon={<Syndicate />} /> 
+        <ListItemLink to="/syndicate" primary="Syndicate" icon={<Rss />} /> 
       </List>        
     </>)
   }
@@ -167,9 +168,7 @@ export function MiniDrawer() {
           </IconButton>
           <Login />
           :   :
-          <Typography
-              className={classes.brandText}
-              color="primary">    
+          <Typography className={classes.brandText} color="primary">    
               888b    |   ,88~~\     ,88~~\                    888                                <br/> 
               |Y88b   |  d888   \   d888   \   d88~\ 888-~88e  888-~88e  e88~~8e  888-~\  e88~~8e <br/>
               | Y88b  | 88888    | 88888    | C888   888  888b 888  888 d888  88b 888    d888  88b<br/>
@@ -178,6 +177,7 @@ export function MiniDrawer() {
               |    Y888   `88__/     `88__/   \_88P  888-_88"  888  888  "88___/  888     "88___/ <br/>
               |                                      888<br/>                      
           </Typography>
+          <Typography className={classes.brandText} color="primary">{menuHeading}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer

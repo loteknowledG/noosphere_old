@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
-import { mdiCancel }  from '@mdi/js';
 
 const suggestions = [
   { label: 'Afghanistan' },

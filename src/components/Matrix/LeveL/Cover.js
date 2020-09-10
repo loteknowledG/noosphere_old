@@ -77,7 +77,9 @@ export function Cover (props) {
   const handleCardHeaderEdit = () => {
     setEdit('header')    
   }
-
+  // if (level === undefined) {
+  //   setLevel([])
+  // }
   return (
     <>
       <Card className={classes.root}>
@@ -89,13 +91,13 @@ export function Cover (props) {
                 R
               </Avatar>
             }            
-            title={JSON.parse(level).title !== '' ? JSON.parse(level).title : 'Add a title'}
+            title={level ? level.title : 'Add a title'}
             subheader={characters.length === 0 ? '' : characters.length === 1 ? characters[0] : characters.map(character => character + ' ')}
           />
         }
         { edit === 'header' && 
           <ClickAwayListener onClickAway={() => {
-            JSON.parse(level).title = JSON.parse(level).title
+            // JSON.parse(level).title = JSON.parse(level).title
             setLevel(level)
             // setLevel(title)
             // handleTitleSave()
@@ -109,12 +111,12 @@ export function Cover (props) {
                   R
                 </Avatar>
               }            
-            title={<TextField label="Title" onChange={
+              title={<TextField multiline fullWidth label="Title" onChange={
                 (event) => {
-                  JSON.parse(level).title = event.target.value
+                  level.title = event.target.value
                   setLevel(level)
                 }
-              } value={JSON.parse(level).title}></TextField>}
+              } value={level.title}></TextField>}
               subheader={
                 <Autocomplete
                   multiple
@@ -137,6 +139,7 @@ export function Cover (props) {
                   }}                  
                 />
               }
+
             />
           </ClickAwayListener>
         }

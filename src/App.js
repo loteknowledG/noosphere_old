@@ -6,7 +6,6 @@ import { Terminus } from "./components/Terminus/Terminus"
 import { Picker } from "./components/Picker/Picker"
 import { Game } from "./components/Matrix/Game/Game"
 import { Matrix } from "./components/Matrix/Matrix"
-import { Scenario } from "./components/Matrix/Scenario/Scenario"
 import { LeveL } from "./components/Matrix/LeveL/LeveL"
 import 'typeface-roboto';
 // import { CreampieCathy } from "./components/Sites";

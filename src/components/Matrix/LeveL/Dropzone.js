@@ -11,7 +11,6 @@ export function Dropzone(props) {
   const [sector, setSector] = useGlobal('sector')  
   const [LeveLUuid, setLeveLUuid] = useGlobal('LeveLUuid')
   let history = useHistory();
-  console.log(history)
   // const onDrop = useCallback((acceptedFiles) => { 
   //   // console.log(acceptedFiles[0].File)
     
@@ -49,17 +48,13 @@ export function Dropzone(props) {
       reader.onerror = () => console.log('file reading has failed')
       reader.onload = () => {
       // Do whatever you want with the file contents
-        const textStr = reader.result
-        console.log(textStr)
-        setLevel(textStr)  
+        const textStr = reader.result        
+        setLevel(JSON.parse(textStr))  
         onClose()
-        console.log(history)
         history.push("/level");
-        // setSector('level')
       }
       reader.readAsText(file)
     })
-    // setSector('level')
   }, [])
   const {getRootProps, getInputProps} = useDropzone({onDrop})
 
@@ -67,7 +62,8 @@ export function Dropzone(props) {
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
+      Drag 'n' drop some files here, or click to select files
+      <br/><br/><br/>
     </div>
   )
 }

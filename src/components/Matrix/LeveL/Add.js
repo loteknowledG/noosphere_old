@@ -6,9 +6,13 @@ import { Button, Dialog, Fab, IconButton, Link, Typography } from '@material-ui/
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import MuiDialogActions from '@material-ui/core/DialogActions'
-import { Plus, Close } from 'mdi-material-ui'
+import { Close, DataMatrixPlus, ContentSaveCog, PlusThick } from 'mdi-material-ui'
 import { uuid } from '../../Utility/uuid'
 import { Dropzone } from './Dropzone'
+import { SpeedDial, SpeedDialIcon, SpeedDialAction }  from '@material-ui/lab'
+import { AddTabs } from './AddTabs'
+// import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+// import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -21,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
   },
   flex: {
     flex: 1,
+  },
+  speedDial: {
+    position: 'absolute',
+    bottom: theme.spacing(7),
+    right: theme.spacing(7),
   },
   textareaAutosize: {
     width: '100%'
@@ -56,18 +65,47 @@ export function Add (props) {
   const { spreadsheetId } = props
   const classes = useStyles();  
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
+  // const [value, setValue] = useState('')
+  // const [speedDialOpen, setSpeedDialOpen] = useState(false)
 
-  
-  window.gapi.load("client:auth2", function() {
-    window.gapi.auth2.init({client_id: "524121216771-vv0e5evrv7k59esgvp181p4tmqbvuvii.apps.googleusercontent.com"});
-  });
+  // if (window.gapi) {
+  //   window.gapi.load("client:auth2", function() {
+  //     window.gapi.auth2.init({client_id: "524121216771-vv0e5evrv7k59esgvp181p4tmqbvuvii.apps.googleusercontent.com"});
+  //   })
+  // }
 
+  // const actions = [
+  //   { icon: <ContentSaveCog />, name: 'Collate & Save',action: () => setOpen(true)},
+  //   { icon: <DataMatrixPlus />, name: 'Create Matrix', action: () => setOpen(true)},    
+  // ];
+
+   
   return (
     <>
       <Fab className={classes.fab} color="primary" aria-label="add" onClick={() => setOpen(true)}>
-        <Plus />
+        <PlusThick />
       </Fab>
+      
+      
+      {/* <SpeedDial
+        ariaLabel="SpeedDial example"
+        className={classes.speedDial}
+        icon={<SpeedDialIcon />}
+        onClose={() => setSpeedDialOpen(false) }
+        onOpen={() => setSpeedDialOpen(true) }
+        open={speedDialOpen}
+        direction={'up'} >
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={action.action}
+          />
+        ))}
+      </SpeedDial> */}
+
+      
       <AddDialog 
         keepMounted
         open={open}
@@ -235,33 +273,23 @@ function AddDialog (props) {
       fullWidth
       onEntering={() => {}}
       aria-labelledby="confirmation-dialog-title"
-      open={open}
-      onClose={() => onClose()}
+      open={props.open}
+      onClose={() => props.onClose()}
       {...other}
     >
-      <DialogTitle id="confirmation-dialog-title" onClose={() => onClose()}>Matter Realize</DialogTitle>
+      <DialogTitle id="confirmation-dialog-title" onClose={() => props.onClose()}>Matter Realize</DialogTitle>
       <DialogContent dividers>
-        <Dropzone onClose={() => onClose()}/>
-        {/* <TextareaAutosize
-          label='copy paste fractal matrix'
-          rowsMin={17}          
-          value={value}
-          onChange={change}
-          margin='normal'
-          variant='outlined'        
-          spellCheck='false'
-          className={classes.textareaAutosize} /> */}
+        <AddTabs onClose={() => props.onClose()} />        
       </DialogContent>
-      <DialogActions>
+      {/* <DialogActions>
         <Button onClick={() => { handleClean()} } color="primary">
           Clean
         </Button>
         <Button onClick={() => { handleMaterialize() }} color="primary">
           Materialize
         </Button>
-        <Link download="info.txt" id="downloadlink" style={{display: "none"}}>download</Link>
-        {/* <a download="info.txt" id="downloadlink" style="display: none">Download</a> */}
-      </DialogActions>
+        <Link download="info.txt" id="downloadlink" style={{display: "none"}}>download</Link>       
+      </DialogActions> */}
     </Dialog>
   )
 }

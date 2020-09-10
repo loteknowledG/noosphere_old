@@ -5,40 +5,29 @@ import { FileDownloadOutline   } from 'mdi-material-ui'
 
 const useStyles = makeStyles((theme) => ({
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(7),
     right: theme.spacing(7),
   },
 }))
 
 export function Write (props) {
-  
-  const [level, setLevel] = useGlobal('level')
-  const gifs = JSON.parse(level).pix
-
+  const [level, setLevel] = useGlobal('level')  
+  const classes = useStyles()
   function download () {
     var textFile = null,
-
     makeTextFile = function (text) {
-      var data = new Blob([text], {type: 'text/plain'});
-
+      var data = new Blob([text], {type: 'application/json'});
       // If we are replacing a previously generated file we need to
       // manually revoke the object URL to avoid memory leaks.
       if (textFile !== null) {
         window.URL.revokeObjectURL(textFile);
       }
-
       textFile = window.URL.createObjectURL(data);
-
       return textFile;
     };
-
-
-  
-
-  
     var link = document.createElement('a');
-    link.setAttribute('download', 'info.txt');
+    link.setAttribute('download', level.title + '.json');
     link.href = makeTextFile(level);
     document.body.appendChild(link);
 
@@ -48,10 +37,8 @@ export function Write (props) {
       link.dispatchEvent(event);
       document.body.removeChild(link);
 		});
-    
   }
 
-  const classes = useStyles();  
   return (
     <>
       <Fab className={classes.fab} color="primary" aria-label="add" onClick={() => download()}>

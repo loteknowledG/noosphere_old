@@ -1,7 +1,6 @@
 import React, { useState, useGlobal } from 'reactn'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Button, Dialog, Fab, IconButton, ListItem, ListItemIcon, ListItemText, Slide, TextField, Toolbar, Typography } from '@material-ui/core'
-import Icon from '@mdi/react'
 import { Close, Firebase } from 'mdi-material-ui'
 import streamSaver from 'streamsaver'
 

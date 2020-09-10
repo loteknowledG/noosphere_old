@@ -13,14 +13,15 @@ const SortableGallery = SortableContainer(({ items }) => (
 
 export function Grid (props) {  
   const [level, setLevel] = useGlobal('level')
-  const gifs = JSON.parse(level).pix
-  const moments = gifs.map((src, idx) => {
+  
+  
+  const moments = level ? level.pix.map((src, idx) => {
     return {
       key: idx.toString(),
       src: src,
       width: 4,
       height: 4
-  }})
+  }}) : []
   const [items, setItems] = useState(moments);
   const onSortEnd = ({ oldIndex, newIndex }) => {
     setItems(arrayMove(items, oldIndex, newIndex));

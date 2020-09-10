@@ -3,7 +3,6 @@ import { Divider, Fab, Icon, IconButton, List, ListItem, ListItemIcon, ListItemT
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { ChevronLeft, ChevronRight, MenuOpen } from 'mdi-material-ui'
 
-import { mdiLibraryShelves } from '@mdi/js'
 import { Matterealize } from './Digit/Matterealize/'
 import { Terminal } from './Digit/'
 import { Teacher, Watcher } from './Digit/Teacher'
