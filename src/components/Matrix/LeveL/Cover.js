@@ -1,8 +1,9 @@
-import React, { useState, useGlobal, useEffect } from 'reactn'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Card, CardHeader, CardMedia, CardContent, Chip, ClickAwayListener, TextField, Typography } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { red } from '@material-ui/core/colors'
+import useGlobal from "../../../store"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,54 +33,12 @@ export function Cover (props) {
   const classes = useStyles()
   const [edit, setEdit] = useState(false)
   const [characters, setCharacters] = useState([])
-  const [spreadsheetId, setSpreadsheetId] = useGlobal('spreadsheetId')
-  const [tableRange, setTableRange] = useGlobal('tableRange')  
-  const [gifs, setGifs] = useGlobal('gifs')
-  const [LeveLUuid, setLeveLUuid] = useGlobal('LeveLUuid')
-  const [level, setLevel] = useGlobal('level')
-
-  
-
-  // const handleTitleSave = () => {
-  //   console.log(title, tableRange)
-  //   return window.gapi.client.sheets.spreadsheets.values.batchUpdate({
-  //     "spreadsheetId": spreadsheetId,
-  //     "resource": {
-  //       "valueInputOption": "RAW",
-  //       "data": [{
-  //         "range": "LeveLs!B" + tableRange,
-  //         "values": [[title]]
-  //       }]
-  //     }
-  //   }).then(function(response) { // Handle the results here (response.result has the parsed body).
-  //     console.log("Response", response);
-  //   },
-  //   function(err) { console.error("Execute error", err); })
-  // }
-
-  // const handleMomentsSave = () => {
-  //   console.log(' moments save : ' + [JSON.stringify(gifs)] )
-  //   return window.gapi.client.sheets.spreadsheets.values.append({
-  //     "spreadsheetId": "1jIQl3dnSPNPT6gWalvhdzNMP2qEQ_pIHWuwggc64fKc",
-  //     "range": LeveLUuid + "!A1",
-  //     "insertDataOption": "OVERWRITE",
-  //     "valueInputOption": "RAW",
-  //     "resource": {
-  //       "values": [[JSON.stringify(gifs)]]
-  //     }
-  //   }).then(function(response) {
-  //     // Handle the results here (response.result has the parsed body).
-  //     console.log("Response", response);
-  //   },
-  //   function(err) { console.error("Execute error", err); });    
-  // }
+  const [globalState, globalActions] = useGlobal()
 
   const handleCardHeaderEdit = () => {
     setEdit('header')    
   }
-  // if (level === undefined) {
-  //   setLevel([])
-  // }
+
   return (
     <>
       <Card className={classes.root}>
@@ -91,21 +50,15 @@ export function Cover (props) {
                 R
               </Avatar>
             }            
-            title={level ? level.title : 'Add a title'}
+            title={globalState.level.title}
             subheader={characters.length === 0 ? '' : characters.length === 1 ? characters[0] : characters.map(character => character + ' ')}
           />
         }
         { edit === 'header' && 
           <ClickAwayListener onClickAway={() => {
-            // JSON.parse(level).title = JSON.parse(level).title
-            setLevel(level)
-            // setLevel(title)
-            // handleTitleSave()
-            // handleMomentsSave()
             setEdit(false)
           }} >
-            <CardHeader 
-              // onClick={() => { handleCardHeaderEdit() }}
+            <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
                   R
@@ -113,10 +66,9 @@ export function Cover (props) {
               }            
               title={<TextField multiline fullWidth label="Title" onChange={
                 (event) => {
-                  level.title = event.target.value
-                  setLevel(level)
+                  globalActions.setTitle(event.target.value)
                 }
-              } value={level.title}></TextField>}
+              } value={globalState.level.title}></TextField>}
               subheader={
                 <Autocomplete
                   multiple
@@ -149,10 +101,6 @@ export function Cover (props) {
           title="Paella dish"
         />
         <CardContent>
-          {/* <Typography variant="body2" color="textSecondary" component="p">
-            This impressive paella is a perfect party dish and a fun meal to cook together with your
-            guests. Add 1 cup of frozen peas along with the mussels, if you like.
-          </Typography> */}
         </CardContent>        
       </Card>      
     </>

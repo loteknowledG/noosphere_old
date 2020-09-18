@@ -3,6 +3,7 @@ import { LoginVariant } from 'mdi-material-ui'
 import { makeStyles } from '@material-ui/core/styles'
 import { Account } from './Account'
 import { Avatar, IconButton, Popover } from '@material-ui/core'
+import GoogleLogin from 'react-google-login';
 // import { loadClient } from '../Cloud/Google/api'
 
 const useStyles = makeStyles(theme => ({        

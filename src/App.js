@@ -7,6 +7,7 @@ import { Picker } from "./components/Picker/Picker"
 import { Game } from "./components/Matrix/Game/Game"
 import { Matrix } from "./components/Matrix/Matrix"
 import { LeveL } from "./components/Matrix/LeveL/LeveL"
+import { Terminal2 } from "./components/Terminal2/Terminal2"
 import 'typeface-roboto';
 // import { CreampieCathy } from "./components/Sites";
 
@@ -19,7 +20,9 @@ function App() {
         <Route exact path="/game" component={Game} />
         <Route exact path="/matrix" component={Matrix} />
         <Route exact path="/level" component={LeveL} />
+        <Route exact path="/terminal2" component={Terminal2} />
         <Route path="/" component={Terminus} />
+        
       </Switch>
     </HashRouter>
   );

@@ -4,10 +4,12 @@
   "private": false,
   "homepage": "http://loteknowledg.github.io/noosphere",
   "dependencies": {
-    "@material-ui/core": "^4.9.13",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.52",
     "@mdi/svg": "^4.9.95",
+    "@mui-treasury/layout": "^4.5.0",
+    "@mui-treasury/mockup": "^1.2.9",
     "array-move": "^2.2.1",
     "autosuggest-highlight": "^3.1.1",
     "cors-anywhere": "^0.4.3",
@@ -16,6 +18,7 @@
     "hookrouter": "^1.2.3",
     "jquery": "^3.5.1",
     "kefir": "^3.8.6",
+    "material-ui-dropzone": "^3.4.0",
     "material-ui-popup-state": "^1.5.4",
     "mdi-material-ui": "^6.18.0",
     "node-sass": "^4.14.1",
@@ -39,8 +42,10 @@
     "react-sortable-hoc": "^1.11.0",
     "reactn": "^2.2.7",
     "streamsaver": "^2.0.4",
+    "styled-components": "^5.2.0",
     "terminal-in-react": "^4.3.1",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "0.0.75",
+    "use-global-hook": "^0.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

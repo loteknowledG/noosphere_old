@@ -1,7 +1,8 @@
-import React, {useState, useGlobal } from 'reactn'
+import React, {useState } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Button, Dialog, Fab, IconButton, Link, Typography } from '@material-ui/core'
 import { FileDownloadOutline   } from 'mdi-material-ui'
+import useGlobal from "../../../store"
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function Write (props) {
-  const [level, setLevel] = useGlobal('level')  
+  const [globalState, globalActions] = useGlobal() 
   const classes = useStyles()
   function download () {
     var textFile = null,
@@ -27,8 +28,8 @@ export function Write (props) {
       return textFile;
     };
     var link = document.createElement('a');
-    link.setAttribute('download', level.title + '.json');
-    link.href = makeTextFile(level);
+    link.setAttribute('download', globalState.level.title + '.json');
+    link.href = makeTextFile(globalState.level);
     document.body.appendChild(link);
 
     // wait for the link to be added to the document

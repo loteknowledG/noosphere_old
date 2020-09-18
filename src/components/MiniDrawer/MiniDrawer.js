@@ -1,8 +1,8 @@
 import React, { useState, useGlobal} from 'reactn'
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, TextField, Toolbar, Typography } from '@material-ui/core'
-import { ChevronLeft, ChevronRight, CubeUnfolded, FormatTitle, HeadLightbulbOutline, Menu, MessageTextOutline, Rss, Store } from 'mdi-material-ui';
+import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
+import { ChevronLeft, ChevronRight, CubeUnfolded, HeadLightbulbOutline, Menu, MessageTextOutline, Rss, Store } from 'mdi-material-ui';
 import { Route, MemoryRouter } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
 import { Syndicate } from '../Syndicate'

@@ -1,8 +1,9 @@
-import React, { useState, useGlobal, memo, useCallback }  from "reactn"
+import React, { useState, memo }  from "react"
 import arrayMove from "array-move"
 import Gallery from "react-photo-gallery"
 import { SortableContainer, SortableElement } from "react-sortable-hoc"
 import Photo from "./Photo"
+import useGlobal from "../../../store";
 
 
 /* popout the browser and maximize to see more rows! -> */
@@ -12,10 +13,10 @@ const SortableGallery = SortableContainer(({ items }) => (
 ))
 
 export function Grid (props) {  
-  const [level, setLevel] = useGlobal('level')
+  const [globalState, globalActions] = useGlobal()
   
   
-  const moments = level ? level.pix.map((src, idx) => {
+  const moments = globalState.level ? globalState.level.pix.map((src, idx) => {
     return {
       key: idx.toString(),
       src: src,

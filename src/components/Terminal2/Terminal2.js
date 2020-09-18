@@ -19,7 +19,7 @@ import {
   ContentMockUp,
   FooterMockUp,
 } from '@mui-treasury/mockup/layout';
-import { CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
 import { ChevronLeft, ChevronRight, CubeUnfolded, HeadLightbulbOutline, Menu, MessageTextOutline, Rss, Store } from 'mdi-material-ui';
 
 const Header = getHeader(styled)
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function Terminus ({ children })  {
+export function Terminal2 (children)  {
   const classes = useStyles()
   return (
     <Root scheme={scheme}>
@@ -132,14 +132,16 @@ export function Terminus ({ children })  {
               <List>
                 <ListItemLink to="/syndicate" primary="Syndicate" icon={<Rss />} /> 
               </List> 
+              {/* <NavContentMockUp /> */}
             </SidebarContent>
             <CollapseBtn />
           </DrawerSidebar>
           <Content>
             { children }
+            <ContentMockUp />
           </Content>
           <Footer>
-            {/* <FooterMockUp /> */}
+            <FooterMockUp />
           </Footer>
         </>
       )}
@@ -147,4 +149,4 @@ export function Terminus ({ children })  {
   );
 };
 
-export default Terminus;
+export default Terminal2;
