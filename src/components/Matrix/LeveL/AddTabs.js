@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Box, Button, Link, Tab, Tabs, TextField, Typography } from '@material-ui/core';
-import { DataMatrixPlus, ContentSaveCog } from 'mdi-material-ui'
+import { AppBar, Box, Button, Tab, Tabs, TextField, Typography } from '@material-ui/core';
+import { ContentSaveCog, DataMatrixPlus } from 'mdi-material-ui'
 import { Dropzone } from './Dropzone'
-import { DropzoneAreaBase } from 'material-ui-dropzone';
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom"
 import useGlobal from "../../../store"
 
 function TabPanel(props) {
@@ -25,19 +24,19 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  );
+  )
 }
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
-};
+}
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
-  };
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   textareaAutosize: {
     width: '100%'
   }
-}));
+}))
 
 export function AddTabs(props) {
   const classes = useStyles();
@@ -59,43 +58,35 @@ export function AddTabs(props) {
   const [textareaValue, setTextareaValue] = useState('')
   const [fileValue, setFileValue] = useState('')
   const [globalState, globalActions] = useGlobal()
-  let history = useHistory();
+  let history = useHistory()
   
   useEffect(() => {
     if (fileValue === '') {}
     else {
-      globalActions.setLevel(fileValue)  
-      globalActions.pushMatrix(fileValue)
-      history.push("/level"); 
+      globalActions.setLevel(fileValue)
+      globalActions.addLevel(fileValue)
+      history.push("/level")
     }
-  }, [fileValue])
+  }, [fileValue, globalActions, history])
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
-  const change = (event) => {    
-    setTextareaValue(event.target.value)    
-  };
+  const change = (event) => {
+    setTextareaValue(event.target.value)
+  }
 
   const handleExecute = () => {
     if (textareaValue) { 
       const gifs = textareaValue.split(',')
                       .filter(gif => gif.includes('https://lh3'))
-                      .map(gif => '"' + gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm, "") + '"') 
-                      console.log(textareaValue.split(','))         
-      const level = JSON.parse('{ "pix": [' + gifs  + ']}')      
-      globalActions.setLevel(level) 
-      globalActions.matrixPush(level)      
-      // props.onClose()
+                      .map(gif => '"' + gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm, "") + '"')
+      const level = JSON.parse('{ "pix": [' + gifs  + ']}')
+      globalActions.setLevel(level)
+      globalActions.addLevel(level)
       history.push("/level")
     }
-  }
-
-  const handleFileRead = (level) => {
-    console.log(level)
-    setFileValue(level)
-    console.log(fileValue)
   }
 
   return (
@@ -114,11 +105,11 @@ export function AddTabs(props) {
         <TextField
           label='copy paste fractal matrix'
           multiline
-          rows={7}   
+          rows={7}
           value={textareaValue}
           onChange={change}
           margin='normal'
-          variant='outlined'        
+          variant='outlined'
           spellCheck='false'
           className={classes.textareaAutosize} />
         <Button onClick={() => { handleExecute()} } color="primary">
@@ -126,8 +117,8 @@ export function AddTabs(props) {
         </Button>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Dropzone handleFileRead={(level) => handleFileRead(level)} />        
-      </TabPanel>      
+        <Dropzone handleFileRead={(level) => setFileValue(level)} />    
+      </TabPanel>    
     </div>
-  );
+  )
 }

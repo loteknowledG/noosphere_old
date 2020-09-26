@@ -29,36 +29,32 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function Note (props) {
-  const classes = useStyles();
-  function takeNote() {
-    
-  }
-  /* | _  _  _  _ 
-  | \|(_)(_|(_)(- 
-      _/   _*/ 
-  return (<>
-    <Container maxWidth="lg">
-      <Card className={classes.root}>
-        <AppBar position="static" className={classes.appBar}>
-        <Toolbar>
-          <TextField id="standard-basic" placeholder="Title" InputProps={{ disableUnderline: true }} fullWidth />
-        </Toolbar> 
-        </AppBar>
-        <CardContent>
-          <List>            
-            <ListItem>
-              <TextField id="standard-basic" placeholder="Take a note" InputProps={{ disableUnderline: true }} fullWidth/>
-            </ListItem>
-          </List>
-        </CardContent>
-        <AppBar position="static" className={classes.appBarBottom}>
-        <Toolbar>
-          
-        </Toolbar> 
-        </AppBar>
-      </Card>
-    </Container>
-  </>)
+  const classes = useStyles()
+  function takeNote() {}
+  return (
+    <>
+      <Container maxWidth="lg">
+        <Card className={classes.root}>
+          <AppBar position="static" className={classes.appBar}>
+          <Toolbar>
+            <TextField id="standard-basic" placeholder="Title" InputProps={{ disableUnderline: true }} fullWidth />
+          </Toolbar> 
+          </AppBar>
+          <CardContent>
+            <List>            
+              <ListItem>
+                <TextField id="standard-basic" placeholder="Take a note" InputProps={{ disableUnderline: true }} fullWidth/>
+              </ListItem>
+            </List>
+          </CardContent>
+          <AppBar position="static" className={classes.appBarBottom}>
+          <Toolbar>
+          </Toolbar> 
+          </AppBar>
+        </Card>
+      </Container>
+    </>
+  )
 }
 
 export default Note

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   / /__/ _ \/ _ `/ / _ \
  /____/\___/\_, /_/_//_/
            /__*/        
-export function Login(props) {    
+export function Login() {    
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [profileToken, setProfileToken] = useGlobal('profileToken')
@@ -30,7 +30,7 @@ export function Login(props) {
     }
     const handleClose = () => {
         setAnchorEl(null);
-    };
+    }
 
     function authenticate() {        
         return window.gapi.auth2.getAuthInstance()
@@ -55,7 +55,6 @@ export function Login(props) {
         })
     }
     if (profileToken) {
-        console.log(profileToken)
         return (
             <>
                 <Avatar src={(profileToken.Pt && profileToken.Pt.QK) || (profileToken.Tt && profileToken.Tt.SK) || (profileToken.Qt && profileToken.Qt.MK)} onClick={ onClick} /> 

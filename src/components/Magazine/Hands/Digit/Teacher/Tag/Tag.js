@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import Select from 'react-select';
-import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import NoSsr from '@material-ui/core/NoSsr';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
+import React from 'react'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
+import Select from 'react-select'
+import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import NoSsr from '@material-ui/core/NoSsr'
+import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper'
+import Chip from '@material-ui/core/Chip'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const suggestions = [
   { label: 'Afghanistan' },
@@ -48,7 +48,7 @@ const suggestions = [
 ].map(suggestion => ({
   value: suggestion.label,
   label: suggestion.label,
-}));
+}))
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -99,7 +99,7 @@ const useStyles = makeStyles(theme => ({
   divider: {
     height: theme.spacing(2),
   },
-}));
+}))
 
 function NoOptionsMessage(props) {
   return (
@@ -110,7 +110,7 @@ function NoOptionsMessage(props) {
     >
       {props.children}
     </Typography>
-  );
+  )
 }
 
 NoOptionsMessage.propTypes = {
@@ -182,7 +182,7 @@ Control.propTypes = {
     }),
   ]).isRequired,
   selectProps: PropTypes.object.isRequired,
-};
+}
 
 function Option(props) {
   return (
@@ -197,7 +197,7 @@ function Option(props) {
     >
       {props.children}
     </MenuItem>
-  );
+  )
 }
 
 Option.propTypes = {
@@ -234,7 +234,7 @@ Option.propTypes = {
    * Whether the option is selected.
    */
   isSelected: PropTypes.bool.isRequired,
-};
+}
 
 function Placeholder(props) {
   const { selectProps, innerProps = {}, children } = props;
@@ -258,7 +258,7 @@ Placeholder.propTypes = {
 }
 
 function ValueContainer(props) {
-  return <div className={props.selectProps.classes.valueContainer}>{props.children}</div>;
+  return <div className={props.selectProps.classes.valueContainer}>{props.children}</div>
 }
 
 ValueContainer.propTypes = {
@@ -292,14 +292,14 @@ MultiValue.propTypes = {
     onTouchEnd: PropTypes.func.isRequired,
   }).isRequired,
   selectProps: PropTypes.object.isRequired,
-};
+}
 
 function Menu(props) {
   return (
     <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
       {props.children}
     </Paper>
-  );
+  )
 }
 
 Menu.propTypes = {
@@ -312,7 +312,7 @@ Menu.propTypes = {
    */
   innerProps: PropTypes.object.isRequired,
   selectProps: PropTypes.object.isRequired,
-};
+}
 
 const components = {
   Control,
@@ -322,16 +322,16 @@ const components = {
   Option,
   Placeholder,
   ValueContainer,
-};
+}
 
 export function Tag () {
-  const classes = useStyles();
-  const theme = useTheme();
+  const classes = useStyles()
+  const theme = useTheme()
   const [multi, setMulti] = React.useState(null);
 
   const handleChangeMulti = value => {
     setMulti(value);
-  };
+  }
 
   const selectStyles = {
     input: base => ({
@@ -339,9 +339,9 @@ export function Tag () {
       color: theme.palette.text.primary,
       '& input': {
         font: 'inherit',
-      },
-    }),
-  };
+      }
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -355,7 +355,7 @@ export function Tag () {
             InputLabelProps: {
               htmlFor: 'react-select-multiple',
               shrink: true,
-            },
+            }
           }}
           placeholder="Select multiple countries"
           options={suggestions}
@@ -366,5 +366,5 @@ export function Tag () {
         />
       </NoSsr>
     </div>
-  );
+  )
 }

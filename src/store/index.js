@@ -3,7 +3,9 @@ import useGlobalHook from "use-global-hook"
 import * as actions from "../actions"
 
 const initialState = {
+
   level: {
+    cover: '',
     title: 'Add a title',
     pix: []
   },

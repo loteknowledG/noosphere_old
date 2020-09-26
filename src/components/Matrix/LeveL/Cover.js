@@ -10,8 +10,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    height: 345,
+    objectFit: 'cover'
+    // paddingTop: '56.25%', // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -91,15 +92,14 @@ export function Cover (props) {
                   }}                  
                 />
               }
-
             />
           </ClickAwayListener>
         }
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/paella.jpg"
-          title="Paella dish"
-        />
+          image={globalState.level.pix[0]}          
+        >
+        </CardMedia>
         <CardContent>
         </CardContent>        
       </Card>      

@@ -5,7 +5,6 @@ import Gallery from "react-photo-gallery"
 export function Tune (props) {
   return (
     <>
-
     </>
   )
 }

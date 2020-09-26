@@ -42,7 +42,7 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
-});
+})
    /*--,                              
   '  .' \            ,---,      ,---, 
  /  ;    '.        ,---.'|    ,---.'| 
@@ -88,14 +88,14 @@ function AddDialog (props) {
           </IconButton>
         ) : null}
       </MuiDialogTitle>
-    );
-  });
+    )
+  })
   
   const DialogContent = withStyles((theme) => ({
     root: {
       padding: theme.spacing(2),
     },
-  }))(MuiDialogContent);
+  }))(MuiDialogContent)
   
   return (
     <Dialog
@@ -111,7 +111,7 @@ function AddDialog (props) {
     >
       <DialogTitle id="confirmation-dialog-title" onClose={() => props.onClose()}>Matter Realize</DialogTitle>
       <DialogContent dividers>
-        <AddTabs onClose={() => onClose} />        
+        <AddTabs onClose={() => onClose} />    
       </DialogContent>
     </Dialog>
   )
