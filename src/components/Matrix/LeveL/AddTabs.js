@@ -4,8 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Box, Button, Tab, Tabs, TextField, Typography } from '@material-ui/core';
 import { ContentSaveCog, DataMatrixPlus } from 'mdi-material-ui'
 import { Dropzone } from './Dropzone'
-import { useHistory } from "react-router-dom"
-import useGlobal from "../../../store"
+import { useHistory } from 'react-router-dom'
+import useGlobal from '../../../store'
+import { v4 as uuidv4 } from 'uuid'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,7 +64,7 @@ export function AddTabs(props) {
   useEffect(() => {
     if (fileValue === '') {}
     else {
-      globalActions.setLevel(fileValue)
+      // globalActions.setLevel(fileValue)
       globalActions.addLevel(fileValue)
       history.push("/level")
     }
@@ -81,10 +82,17 @@ export function AddTabs(props) {
     if (textareaValue) { 
       const gifs = textareaValue.split(',')
                       .filter(gif => gif.includes('https://lh3'))
-                      .map(gif => '"' + gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm, "") + '"')
-      const level = JSON.parse('{ "pix": [' + gifs  + ']}')
-      globalActions.setLevel(level)
+                      .map(gif => '"' + gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm, "") + '"')      
+      const level = {}
+      level.pix = JSON.parse('{ "pix": [' + gifs  + ']}').pix.map((moment) => {
+        let pix = {}
+        pix.key = uuidv4()
+        pix.src = moment
+        return pix
+      })
+      // globalActions.setLevel(level)
       globalActions.addLevel(level)
+      console.log(globalState.matrix)
       history.push("/level")
     }
   }

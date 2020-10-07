@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Add } from './LeveL/Add'
+import { Maker } from './Maker/Maker'
 import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid } from '@material-ui/core'
 import { Terminus } from '../Terminus/Terminus'
 import useGlobal from '../../store'
@@ -37,7 +37,7 @@ export function Matrix() {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   let history = useHistory()
-
+  
   function Levels() {
     if (globalState.matrix.length > 0) {
       return (<Grid container className={classes.root} spacing={2}>
@@ -75,7 +75,7 @@ export function Matrix() {
     }
     return (null)
   }
-  return (<><Terminus children={<><Levels/><Add/></>} /></>)
+  return (<><Terminus children={<><Levels/><Maker/></>} /></>)
 }
 
 export default Matrix

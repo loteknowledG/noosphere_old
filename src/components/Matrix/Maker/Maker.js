@@ -1,4 +1,3 @@
-
 import React, {useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
@@ -6,8 +5,8 @@ import { Dialog, Fab, IconButton, Typography } from '@material-ui/core'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import MuiDialogActions from '@material-ui/core/DialogActions'
-import { Close, PlusThick } from 'mdi-material-ui'
-import { AddTabs } from './AddTabs'
+import { Close, DataMatrixPlus } from 'mdi-material-ui'
+import { AddTabs } from '../LeveL/AddTabs'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -43,27 +42,15 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 })
-   /*--,                              
-  '  .' \            ,---,      ,---, 
- /  ;    '.        ,---.'|    ,---.'| 
-:  :       \       |   | :    |   | : 
-:  |   /\   \      |   | |    |   | | 
-|  :  ' ;.   :   ,--.__| |  ,--.__| | 
-|  |  ;/  \   \ /   ,'   | /   ,'   | 
-'  :  | \  \ ,'.   '  /  |.   '  /  | 
-|  |  '  '--'  '   ; |:  |'   ; |:  | 
-|  :  :        |   | '/  '|   | '/  ' 
-|  | ,'        |   :    :||   :    :| 
-`--''           \   \  /   \   \  /   
-                 `----'     `---*/          
-export function Add (props) {
+
+export function Maker () {
   const classes = useStyles();  
   const [open, setOpen] = useState(false)
    
   return (
     <>
-      <Fab className={classes.fab} color="primary" aria-label="add" onClick={() => setOpen(true)}>
-        <PlusThick />
+      <Fab className={classes.fab} color="primary" aria-label="matrix creation" onClick={() => setOpen(true)}>
+        <DataMatrixPlus />
       </Fab>
       <AddDialog 
         keepMounted
@@ -76,7 +63,6 @@ export function Add (props) {
 
 function AddDialog (props) {
   const { onClose, value: valueProp, open, ...other } = props
-
   const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
@@ -116,3 +102,5 @@ function AddDialog (props) {
     </Dialog>
   )
 }
+
+export default Maker

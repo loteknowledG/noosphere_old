@@ -13,12 +13,12 @@ const SortableGallery = SortableContainer(({ items }) => (
   <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
 ))
 
-export function Grid (props) {  
+export function GridSort (props) {  
   const [globalState, globalActions] = useGlobal()
-  const moments = globalState.level ? globalState.level.pix.map((src) => {
+  const moments = globalState.level ? globalState.level.pix.map((pic) => {
     return {
-      key: uuidv4(),
-      src: src,
+      key: pic.key,
+      src: pic.src,
       width: 4,
       height: 4
   }}) : []
@@ -37,4 +37,4 @@ export function Grid (props) {
   </>
   )
 }
-export default memo(Grid)
+export default memo(GridSort)

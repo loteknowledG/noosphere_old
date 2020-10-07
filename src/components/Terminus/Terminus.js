@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from 'prop-types'
 import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
@@ -19,6 +19,7 @@ import {
 import { CssBaseline, Divider, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
 import { CubeUnfolded, HeadLightbulbOutline, MessageTextOutline, Rss, Store, GamepadSquareOutline  } from 'mdi-material-ui'
 import { Login1 } from './Login/Login1' 
+import useGlobal from "../../store"
 
 const Header = getHeader(styled)
 const DrawerSidebar = getDrawerSidebar(styled)
@@ -29,28 +30,7 @@ const Content = getContent(styled)
 const Footer = getFooter(styled)
 const scheme = Layout()
 
-function ListItemLink(props) {
-  const { icon, primary, to } = props
 
-  const renderLink = React.useMemo(
-    () => React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
-    [to],
-  )
-
-  return (
-    <li>
-      <ListItem button component={renderLink}>
-        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
-        <ListItemText primary={primary} />
-      </ListItem>
-    </li>
-  )
-}
-ListItemLink.propTypes = {
-  icon: PropTypes.element,
-  primary: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-}
 
 scheme.configureHeader((builder) => {
   builder
@@ -75,7 +55,7 @@ scheme.configureEdgeSidebar((builder) => {
       width: 256, // px, (%, rem, em is compatible)
       collapsible: true,
       collapsedWidth: 64,
-      headerMagnetEnabled: true,
+      headerMagnetEnabled: true
     })
 })
 
@@ -90,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     cellspacing: 3
-  },
+  },  
   neon: {
     color: 'whitesmoke',
     textShadow:
@@ -105,6 +85,28 @@ const useStyles = makeStyles((theme) => ({
 
 export function Terminus ({ children })  {
   const classes = useStyles()
+  const [globalState, globalActions] = useGlobal()
+
+  function ListItemLink(props) {
+    const { icon, primary, to, idx } = props
+    const renderLink = React.useMemo(
+      () => React.forwardRef((itemProps, ref) => <RouterLink to={to} ref={ref} {...itemProps} />),
+      [to],
+    )
+    return (
+      <ListItem button component={renderLink} selected={globalState.selectedIdx === idx} onClick={() => globalActions.setSelectedIdx(idx)}>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItem>
+    )
+  }
+  ListItemLink.propTypes = {
+    icon: PropTypes.element,
+    primary: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired
+  }
+
   return (
     <Root scheme={scheme}>
       {({ state: { sidebar } }) => (
@@ -124,29 +126,29 @@ export function Terminus ({ children })  {
             </Typography>
             </Toolbar>
           </Header>
-          <DrawerSidebar sidebarId="primarySidebar">
+          <DrawerSidebar sidebarId="primarySidebar" >
             <SidebarContent>
               {/* <NavHeaderMockUp collapsed={sidebar.primarySidebar.collapsed} /> */}
               <Login1 />
               <List>
-                <ListItemLink to="/game" primary="Game" icon={<GamepadSquareOutline />} />
+                <ListItemLink to="/game" primary="Game" icon={<GamepadSquareOutline />} idx={0} />
               </List>
               <List>
-                <ListItemLink to="/matrix" primary="Matrix" icon={<CubeUnfolded />} />       
-              </List>
-              <Divider />
-              <List>
-                <ListItemLink to="/message" primary="Message" icon={<MessageTextOutline />} />       
-              </List>
-              <List>
-                <ListItemLink to="/note" primary="Note" icon={<HeadLightbulbOutline />} />
+                <ListItemLink to="/matrix" primary="Matrix" icon={<CubeUnfolded />} idx={1} />       
               </List>
               <Divider />
               <List>
-                <ListItemLink to="/store" primary="Store" icon={<Store />} />
+                <ListItemLink to="/message" primary="Message" icon={<MessageTextOutline />} idx={2} />       
               </List>
               <List>
-                <ListItemLink to="/syndicate" primary="Syndicate" icon={<Rss />} />
+                <ListItemLink to="/note" primary="Note" icon={<HeadLightbulbOutline />} idx={3} />
+              </List>
+              <Divider />
+              <List>
+                <ListItemLink to="/store" primary="Store" icon={<Store />} idx={4} />
+              </List>
+              <List>
+                <ListItemLink to="/syndicate" primary="Syndicate" icon={<Rss />} idx={5} />
               </List>
             </SidebarContent>
             <CollapseBtn />

@@ -1,4 +1,5 @@
 export const addLevel = (store, level) => {
+  store.setState({ level })  
   store.state.matrix.push(level)
 }
 
@@ -8,8 +9,13 @@ export const getLevel = (store) => {
 
 export const setLevel = (store, level) => {
   store.setState({ level })  
+  store.state.matrix[store.state.levelIdx] = level
 }
 
 export const setTitle = (store, title) => {
   store.state.level.title = title  
+}
+
+export const setSelectedIdx = (store, selectedIdx) => {
+  store.setState({ selectedIdx })
 }

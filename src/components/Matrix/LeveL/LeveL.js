@@ -1,19 +1,20 @@
 import React, { memo } from 'react'
 import Cover from './Cover'
-import Grid from "./Grid"
+import GridSort from "./GridSort"
+import GridEdit from './GridEdit'
 import Write from "./Write"
 import { Terminus } from '../../Terminus/Terminus'
-import { Redirect } from "react-router-dom"
-import useGlobal from "../../../store"
+import { Redirect } from 'react-router-dom'
+import useGlobal from '../../../store'
+import TopBar from './TopBar'
 
 export function LeveL (props) {  
   const [globalState, globalActions] = useGlobal()
-  if (globalState.level.pix.length === 0) {
+  if (globalState.level.pix[0].src === '') {
     return <Redirect to="/" push={true} />
   }
   return (
-    <>
-      <Terminus children={<><Cover /><Grid />{ globalState.level.pix && globalState.level.pix.length > 0 && <Write /> }</>} /></>)
+    <><TopBar /><Cover /><GridEdit zoomIn={true} /></>)
 }
 
 export default memo(LeveL)

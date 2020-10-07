@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Card, CardHeader, CardMedia, CardContent, Chip, ClickAwayListener, TextField, Typography } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete'
@@ -97,7 +97,7 @@ export function Cover (props) {
         }
         <CardMedia
           className={classes.media}
-          image={globalState.level.pix[0]}          
+          image={globalState.level.pix[0].src}          
         >
         </CardMedia>
         <CardContent>
