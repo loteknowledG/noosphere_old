@@ -63,8 +63,7 @@ export function AddTabs(props) {
   
   useEffect(() => {
     if (fileValue === '') {}
-    else {
-      // globalActions.setLevel(fileValue)
+    else {      
       globalActions.addLevel(fileValue)
       history.push("/level")
     }
@@ -84,15 +83,15 @@ export function AddTabs(props) {
                       .filter(gif => gif.includes('https://lh3'))
                       .map(gif => '"' + gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm, "") + '"')      
       const level = {}
+      level.key = uuidv4()
       level.pix = JSON.parse('{ "pix": [' + gifs  + ']}').pix.map((moment) => {
         let pix = {}
         pix.key = uuidv4()
         pix.src = moment
         return pix
       })
-      // globalActions.setLevel(level)
+      level.cover = level.pix[0].src
       globalActions.addLevel(level)
-      console.log(globalState.matrix)
       history.push("/level")
     }
   }

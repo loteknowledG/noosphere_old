@@ -16,13 +16,18 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(7),
     right: theme.spacing(7),
   },
-  paper: {
+  media: {
     height: 345,
-    width: 345,
+    objectFit: 'cover'
+    // paddingTop: '56.25%', // 16:9
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  paper: {
+    height: 345,
+    width: 345,
+  }, 
   title: {
     flexGrow: 1,
   },
@@ -43,10 +48,10 @@ export function Matrix() {
       return (<Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2}>
-            {globalState.matrix.map((card) => (
-              <Grid key={card.id} item>
+            {globalState.matrix.map((level) => (
+              <Grid key={level.key} item>
                 <Card className={classes.paper} onClick={() => {
-                  globalActions.setLevel(card)
+                  globalActions.setLevel(level)
                   history.push("/level")
                 }}>
                   <CardHeader
@@ -55,12 +60,12 @@ export function Matrix() {
                         R
                       </Avatar>
                     }          
-                    title={card.title}
-                    subheader={card.title}
+                    title={level.title}
+                    subheader={level.title}
                   />
                   <CardMedia
                     className={classes.media}
-                    image="https://lh3.googleusercontent.com/nO7QVdqIvdaYETvWuI9xLXmyCgB-bvLhEdH7_7MhcTafOK7GaJbxkzW6JpDF5eudqcmMYc0SSNJUKmdk4CnUdlrGZEx_vcPkKLLSOmHtiy8vKGpHRb19b96s3HlJcrVpchnVvBiBHEkspCUbd-r4mYIIIhp1Bx_kPfRzO5Ra0KtQgwTOUuMXCCh8VhXl5FIL0bJGY8ResXdOFBSamH1AXcV3vPatinJUgpXrLpQ_iVvaAldu6F3SBD9rRyYroCtYm46b-1brfP1pL2UFUExfxZZD9jot0SmSAj4pOEXjCDdrxyXdMoC9TAlCqntlxEoxp461ZyrqHJgpsqdP04f85a74UEeNyug7Gqi3F_iILMC5WlOCJiBGoHHtzUwHCermbiiePPY1PAl8yH6nxeto2qI7G09patM47AbTLZwMxuqMvALYnUpTzImktZeMot3VhNEstwpU6OHntVv2n3AxBFPCsLc3T0SUCe2PSOAzqcORhoGUjazwZcn7XejSDCSCZPYWQ2NUUwzIzSYQDR6ySsKeDul9NQuLvlONsicvGkrEJUY78644Ir9Vfb1TDTTyQmArX36Ct0YN8tXl1Xa9vYduLDxqvI0r3NcrZA43X_xEHMX2O_kpWGPQZis_IWEtjy7OWVihvpIdXH5Nt6jFyZA8th6Bvm9N_rgXW7PM0bRQJH3gDQ-_iOAXgSlZYw"
+                    image={level.cover}
                     title="Paella dish"
                   />
                   <CardContent>
