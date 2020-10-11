@@ -97,16 +97,16 @@ export function Mattereal(props) {
           <Cookie handlePP={handlePP}>          
             <motion.div ref={constraintsRef} >
             <Card className="qcard">
-            <CardActionArea>
-              <CardMedia
-                className={classes.card}
-                component="img"
-                image={image}
-                onClick={(e) => { onClick() }}
-                src={image}
-                onError={() => {setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
-              />
-            </CardActionArea>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.card}
+                  component="img"
+                  image={image}
+                  onClick={(e) => { onClick() }}
+                  src={image}
+                  onError={() => {setIdx(load.length > idx + 1 ? idx + 1 : 0)}}
+                />
+              </CardActionArea>
             </Card>
             </motion.div> 
           </Cookie>

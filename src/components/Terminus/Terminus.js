@@ -131,7 +131,7 @@ export function Terminus ({ children })  {
               {/* <NavHeaderMockUp collapsed={sidebar.primarySidebar.collapsed} /> */}
               <Login1 />
               <List>
-                <ListItemLink to="/game" primary="Game" icon={<GamepadSquareOutline />} idx={0} />
+                <ListItemLink to="/arcade" primary="Game" icon={<GamepadSquareOutline />} idx={0} />
               </List>
               <List>
                 <ListItemLink to="/matrix" primary="Matrix" icon={<CubeUnfolded />} idx={1} />       
