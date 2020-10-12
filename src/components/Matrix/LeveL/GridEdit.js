@@ -74,9 +74,7 @@ export function GridEdit(props) {
         break;
       case 'Remove':
         let level = globalState.level
-        level.pix = globalState.level.pix.filter(pic => !selected.includes(pic.key))
-        console.log(level)
-        // setLevel(level)
+        level.pix = globalState.level.pix.filter(pic => !selected.includes(pic.key))        
         globalActions.setLevel(level)
         break;
       case 'Save':
@@ -164,26 +162,7 @@ export function GridEdit(props) {
               tooltipOpen
             />
           ))}
-        </SpeedDial>
-      {/* <Zoom in={props.zoomIn}>
-        { selected ? 
-          <Write /> :
-          <ImageRemove />
-        }
-      </Zoom> */}
-      {/* <Zoom
-          // key={fab.color}
-          in={value === index}
-          timeout={transitionDuration}
-          style={{
-            transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
-          }}
-          unmountOnExit
-        >
-          <Fab aria-label={fab.label} className={fab.className} color={fab.color}>
-            {fab.icon}
-          </Fab>
-        </Zoom> */}
+        </SpeedDial>      
     </div>
   )
 }

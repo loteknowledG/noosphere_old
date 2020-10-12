@@ -4,7 +4,6 @@ import * as actions from "../actions"
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
-
   level: {
     key: uuidv4(),
     cover: '',
@@ -14,8 +13,8 @@ const initialState = {
       src: ''
     }]
   },
-  matrix: [],
-  selectedIdx: 0
+  levelIdx: 0,
+  matrix: []  
 }
 
 const useGlobal = useGlobalHook(React, initialState, actions);

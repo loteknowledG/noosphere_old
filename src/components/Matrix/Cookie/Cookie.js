@@ -14,8 +14,8 @@ export function Cookie (props) {
         var y = event.clientY - offset.top;
         setpp((pp + 1))
         $("#cookie").append('<div id="x'+pp+'" hidden>+1.0</div>');
-        $("#x"+pp).css("top", event.clientY);
-        $("#x"+pp).css("left", event.clientX - 10);
+        $("#x"+pp).css("top", y);
+        $("#x"+pp).css("left", x);
         $("#x"+pp).css("position", "absolute");
         $("#x"+pp).css("width", "25px");
         $("#x"+pp).css("height", "25px");

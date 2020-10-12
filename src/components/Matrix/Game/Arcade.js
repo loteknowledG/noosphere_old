@@ -4,6 +4,7 @@ import { Terminus } from '../../Terminus/Terminus'
 import useGlobal from '../../../store'
 import { StyleRoot } from 'radium'
 import { makeStyles } from '@material-ui/core/styles'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   fullHeight: {
@@ -23,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
 export function Arcade() {  
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
+  const history = useHistory()
   var fn = function () {
     /* do you want */  
   }
 
   
   
-  function Covers() {
-    console.log('covers')
+  function Covers() {    
     return (
       <StyleRoot>
         <Coverflow
@@ -48,10 +49,14 @@ export function Arcade() {
             }
           }}
         >
-          { globalState.matrix.map((level, idx) => {            
-            return (
-              <img src={level.cover} alt={level.title} data-action=""/>    
-            )  
+          { globalState.matrix.map((level, idx) => {    
+              return (
+                <img key={idx} src={level.cover} alt={level.title} onClick={() => { 
+                  globalActions.setLevel(level)
+                  globalActions.setLevelIdx(idx)
+                  history.push("/game")
+                }} />    
+              )  
           })}   
         </Coverflow>
       </StyleRoot>

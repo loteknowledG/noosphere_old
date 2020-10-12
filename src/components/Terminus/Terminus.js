@@ -94,7 +94,7 @@ export function Terminus ({ children })  {
       [to],
     )
     return (
-      <ListItem button component={renderLink} selected={globalState.selectedIdx === idx} onClick={() => globalActions.setSelectedIdx(idx)}>
+      <ListItem button component={renderLink} selected={globalState.levelIdx === idx} onClick={() => globalActions.setLevelIdx(idx)}>
         {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
         <ListItemText primary={primary} />
       </ListItem>

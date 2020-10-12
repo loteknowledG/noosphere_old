@@ -5,6 +5,7 @@ import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid } from '@materia
 import { Terminus } from '../Terminus/Terminus'
 import useGlobal from '../../store'
 import { useHistory } from 'react-router-dom'
+
 // import { loadClient } from '../Cloud/Google/api'
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +70,6 @@ export function Matrix() {
                     title="Paella dish"
                   />
                   <CardContent>
-
                   </CardContent>
                 </Card>
               </Grid>
