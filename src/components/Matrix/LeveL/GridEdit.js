@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Paper } from '@material-ui/core'
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@material-ui/lab/'
-
 import { CloudDownload, ContentSave, DeleteVariant } from 'mdi-material-ui'
 import useGlobal from '../../../store'
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
@@ -86,6 +85,7 @@ export function GridEdit(props) {
     setOpen(false);
   }
 
+
   function download() {
     var textFile = null,
     makeTextFile = function (text) {
@@ -118,8 +118,8 @@ export function GridEdit(props) {
         { globalState.level ? globalState.level.pix.map((pic) => {          
           return (
             <Grid item xs key={pic.key} >
-              <Paper className={classes.paper} onClick={(picked) => {                
-                if (picked.target.style.backgroundColor === '') {
+              <Paper className={classes.paper} onClick={(picked) => {                                                                
+                if (picked.target.style.backgroundColor === '') {  //  /\ |) |)   |) [- |_ [- ~|~ [-  
                   picked.target.style.backgroundColor = 'violet'
                   if (actions.findIndex( x => x.name === 'Remove' ) < 0) {
                     actions.push({ icon: <DeleteVariant  />, name: 'Remove' })
@@ -127,7 +127,7 @@ export function GridEdit(props) {
                   if (selected.indexOf(pic.key) === -1) {
                      selected.push(pic.key)
                   }                  
-                } else {
+                } else { //  /? [- |\/| () \/ [-   |) [- |_ [- ~|~ [- 
                   picked.target.style.backgroundColor = ''
                   if (selected.indexOf(pic.key) > -1) {
                     selected.splice(selected.indexOf(pic.key), 1)

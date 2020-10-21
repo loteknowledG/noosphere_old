@@ -1,12 +1,10 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Maker } from './Maker/Maker'
+import { Dialer } from './Dialer/Dialer'
 import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid } from '@material-ui/core'
 import { Terminus } from '../Terminus/Terminus'
 import useGlobal from '../../store'
 import { useHistory } from 'react-router-dom'
-
-// import { loadClient } from '../Cloud/Google/api'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,7 +78,7 @@ export function Matrix() {
     }
     return (null)
   }
-  return (<><Terminus children={<><Levels/><Maker/></>} /></>)
+  return (<><Terminus children={<><Levels /><Dialer/></>} /></>)
 }
 
 export default Matrix

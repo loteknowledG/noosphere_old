@@ -86,7 +86,6 @@ export function Cover (props) {
                     <TextField {...params} variant="filled" label="characters" />
                   )}
                   onChange={(event, newValue) => {
-                    console.log(newValue)
                     setCharacters(newValue)
                   }}                  
                 />

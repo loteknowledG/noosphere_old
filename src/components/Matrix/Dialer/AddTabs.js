@@ -63,9 +63,13 @@ export function AddTabs(props) {
   
   useEffect(() => {
     if (fileValue === '') {}
+    else if (fileValue.matrix) {
+      globalActions.setMatrix(fileValue.matrix)
+      props.onClose()      
+    }
     else {      
       globalActions.addLevel(fileValue)
-      history.push("/level")
+      history.push('/level')
     }
   }, [fileValue, globalActions, history])
 
@@ -129,3 +133,4 @@ export function AddTabs(props) {
     </div>
   )
 }
+export default AddTabs

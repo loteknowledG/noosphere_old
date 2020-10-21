@@ -1,2 +1,0 @@
-export { Matrix } from './Matrix'
-

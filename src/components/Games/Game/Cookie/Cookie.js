@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import $ from 'jquery'
 import './cookie.css'
 
-
 export function Cookie (props) {
-    // var x = 0;
     const [pp, setpp] = useState(0)
 
     function handleClick(event) {
@@ -13,7 +11,7 @@ export function Cookie (props) {
         var x = event.clientX - offset.left;
         var y = event.clientY - offset.top;
         setpp((pp + 1))
-        $("#cookie").append('<div id="x'+pp+'" hidden>+1.0</div>');
+        $("#cookie").append('<div id="x'+pp+'" hidden>+37</div>');
         $("#x"+pp).css("top", y);
         $("#x"+pp).css("left", x);
         $("#x"+pp).css("position", "absolute");
@@ -23,12 +21,12 @@ export function Cookie (props) {
         $("#x"+pp).css("font-weight", "bold");
         $("#x"+pp).css("animation", "GoUp 2s forwards linear");
         $("#x"+pp).show();
-        props.handlePP(1);
+        props.handlePP(37);
     } 
 
     return (
         <div id="cookie" onClick={handleClick}>
-             {props.children}
+            {props.children}
         </div>
     )
 }
