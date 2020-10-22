@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export function AddTabs(props) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const [showExecute, setShowExecute] = useState(false)
   const [textareaValue, setTextareaValue] = useState('')
   const [fileValue, setFileValue] = useState('')
   const [globalState, globalActions] = useGlobal()
@@ -78,11 +79,17 @@ export function AddTabs(props) {
   }
 
   const change = (event) => {
+    if (event.target.value.trim().length > 0) {
+      setShowExecute(true)
+    }    
+    else {
+      setShowExecute(false)
+    }
     setTextareaValue(event.target.value)
   }
 
   const handleExecute = () => {
-    if (textareaValue) { 
+    if (textareaValue) {       
       const gifs = textareaValue.split(',')
                       .filter(gif => gif.includes('https://lh3'))
                       .map(gif => '"' + gif.replace(/(\["|")/g, '').replace(/(\r\n\t|\n|\r\t)/gm, "") + '"')      
@@ -123,9 +130,7 @@ export function AddTabs(props) {
           variant='outlined'
           spellCheck='false'
           className={classes.textareaAutosize} />
-        <Button onClick={() => { handleExecute()} } color="primary">
-          Execute
-        </Button>
+        { showExecute ? <Button onClick={() => { handleExecute()} } color="primary">Execute</Button> : null }
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Dropzone handleFileRead={(level) => setFileValue(level)} />    

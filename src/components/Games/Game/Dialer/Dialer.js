@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles'
@@ -38,7 +39,6 @@ CircularProgressWithLabel.propTypes = {
 export function Dialer (props) {  
   const [progress, setProgress] = React.useState(100);
   const { ppp } = props
-  
 
   React.useEffect(() => {
     setProgress(100 - ppp)

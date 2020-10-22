@@ -1,7 +1,8 @@
 import React, { useEffect, useGlobal } from 'reactn'
 import { Avatar, Grid, Typography } from '@material-ui/core/'
 import { makeStyles } from '@material-ui/core/styles'
-import { Login1 } from './Login1'
+// import { Login1 } from './Login1'
+import { Login } from './Login'
 
 const useStyles = makeStyles(theme => ({        
     large: {
@@ -42,6 +43,6 @@ export function Account(props) {
     //     </>
     // )
     return (
-        <Login1/>
+        <Login/>
     )
 }

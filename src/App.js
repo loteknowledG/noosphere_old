@@ -9,6 +9,7 @@ import { Matrix } from './components/Matrix/Matrix'
 import { Picker } from './components/Picker/Picker'
 import { Terminus } from './components/Terminus/Terminus'
 import { Terminus1 } from './components/Terminus/Terminus1'
+
 import 'typeface-roboto'
 
 function App() {

@@ -18,7 +18,8 @@ import {
 } from '@mui-treasury/mockup/layout'
 import { CssBaseline, Divider, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@material-ui/core'
 import { CubeUnfolded, HeadLightbulbOutline, MessageTextOutline, Rss, Store, GamepadSquareOutline  } from 'mdi-material-ui'
-import { Login1 } from './Login/Login1' 
+// import { Login1 } from './Login/Login1' 
+import { Login } from './Login/Login'
 import useGlobal from "../../store"
 
 const Header = getHeader(styled)
@@ -129,7 +130,7 @@ export function Terminus ({ children })  {
           <DrawerSidebar sidebarId="primarySidebar" >
             <SidebarContent>
               {/* <NavHeaderMockUp collapsed={sidebar.primarySidebar.collapsed} /> */}
-              <Login1 />
+              <Login />
               <List>
                 <ListItemLink to="/arcade" primary="Game" icon={<GamepadSquareOutline />} idx={0} />
               </List>
