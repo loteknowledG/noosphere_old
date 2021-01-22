@@ -3,11 +3,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@material-ui/lab';
 import { Dialog, Fab, IconButton, Typography } from '@material-ui/core'
-import { Close, CloudDownload, ContentSave, UploadMultiple } from 'mdi-material-ui'
+import { Close, CloudBraces, CodeJson, MicrosoftExcel, UploadMultiple } from 'mdi-material-ui'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import useGlobal from '../../../store'
-import { AddTabs } from './AddTabs'
+import { ImportTabs } from './ImportTabs'
+import GooglePicker from 'react-google-picker'
+import Papa from 'papaparse'
+
 
 const useStyles = makeStyles((theme) => ({
   speedDial: {
@@ -21,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       left: theme.spacing(2),
     },
   },
-}));
+}))
 
 const styles = (theme) => ({
   root: {
@@ -48,32 +51,88 @@ export function Dialer (props) {
   const [dialerOpen, setDialerOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [actions, setActions] = useState([{ icon: <UploadMultiple />, name: 'Upload'} ])
+  const [actions, setActions] = useState([
+    { icon: <UploadMultiple />, name: 'Upload'}, 
+    // { icon: <GooglePicker clientId={'951030999356-u51qqgcjepmp5d7vnc3ne0vkttnsqq60.apps.googleusercontent.com'}
+    //     developerKey={'AIzaSyDW4LZ0gVG9X_2r7muG5a06YlM9MBlj8zY'}
+    //     scope={['https://www.googleapis.com/auth/drive.readonly']}
+    //     onChange={data =>  {
+    //       if (data.docs) {
+    //         // https://drive.google.com/u/0/uc?id=1qqr6L74q267HOGmh9HzPOVEmPx10xhzj&export=download
+    //         fetch('https://cors-anywhere.herokuapp.com/https://drive.google.com/u/0/uc?id=1qqr6L74q267HOGmh9HzPOVEmPx10xhzj&export=download')
+    //           //data.docs[0].url)
+    //           .then(response => response.json)
+    //           .then(data => console.log(data))
+    //         console.log('on change:', data)  
+    //       }
+    //       console.log('on change:', data)
+    //     }}
+    //     onAuthFailed={data => console.log('on auth failed:', data)}
+    //     multiselect={true}
+    //     navHidden={true}
+    //     authImmediate={false}
+    //     mimeTypes={['application/json']}
+    //     query={'matrix.json'}
+    //     viewId={'DOCS'}>
+    //   <CloudBraces />
+    // </GooglePicker>, name: 'Picker'},
+    // { icon: < MicrosoftExcel />, name: 'Sheets' },    
+  ])
   const [globalState, globalActions] = useGlobal()
 
   const handleVisibility = () => {
     setHidden((prevHidden) => !prevHidden);
-  };
+  }
   const handleOpen = () => {
     setDialerOpen(true);
-  };
+  }
 
   const handleClose = () => {
     setDialerOpen(false);
-  };
+  }
 
   const handleClick = (name) => {
     switch(name) {
       case 'Download':
-        download()
-        setDialogOpen(false);        
-        break;      
+        // download()
+        // setDialogOpen(false);        
+      break;      
       case 'Save':
         // code block
-        break;
+      break;
       case 'Upload':
         setDialerOpen(false)
-        setDialogOpen(true)        
+        setDialogOpen(true) 
+      break;
+      case 'Picker':
+
+      break;      
+      case 'Sheets': 
+        // fetch('https://cors-anywhere.herokuapp.com/https://docs.google.com/spreadsheets/d/1pwiwedNdpQ6Eikg8hEEOy80T00-OsRN7-DgrV9zUiDA/edit?usp=sharing')        
+        //   .then(response => response.json)
+        //   .then(data => globalActions.setMatrix(data))
+      break
+      case 'Json':
+        // fetch('https://api.jsonbin.io/b/5fbd8a7404be4f05c929f77b', {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'secret-key': '$2b$10$2aQF212QWDkVna7roxDTGuzBmN1QbRl59wZR2yZP00MEbio968ySu'
+        //   },
+        // }).then(function(response) {
+        //     if (response.status !== 200) {
+        //       console.log('Looks like there was a problem. Status Code: ' +
+        //         response.status)
+        //       return
+        //     } // Examine the text in the response
+        //     response.json().then(function(data) {
+        //       console.log(data)
+        //       globalActions.setMatrix(data)
+        //     })
+        //   }
+        // ).catch(function(err) {
+        //   console.log('Fetch Error :-S', err);
+        // });
+      break
       default:
         // code block
     }
@@ -96,7 +155,6 @@ export function Dialer (props) {
     link.setAttribute('download', 'matrix.json')
     link.href = makeTextFile(globalState.level)
     document.body.appendChild(link)
-
     // wait for the link to be added to the document
     window.requestAnimationFrame(function () {
       var event = new MouseEvent('click')
@@ -106,7 +164,7 @@ export function Dialer (props) {
   }
 
   return (<>
-  <SpeedDial
+    <SpeedDial
       ariaLabel="GridEdit SpeedDial"
       className={classes.speedDial}
       hidden={hidden}
@@ -132,6 +190,7 @@ export function Dialer (props) {
     />  
   </>)
 }
+
 function AddDialog (props) {
   const { onClose, value: valueProp, open, ...other } = props
   const DialogTitle = withStyles(styles)((props) => {
@@ -168,7 +227,7 @@ function AddDialog (props) {
     >
       <DialogTitle id="confirmation-dialog-title" onClose={() => props.onClose()}>Matter Realize</DialogTitle>
       <DialogContent dividers>
-        <AddTabs onClose={() => props.onClose()} />    
+        <ImportTabs onClose={() => props.onClose()} />    
       </DialogContent>
     </Dialog>
   )

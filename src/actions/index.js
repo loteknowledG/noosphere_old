@@ -14,6 +14,9 @@ export const setLevelIdx = (store, levelIdx) => {
 export const setMatrix = (store, matrix) => {
   store.setState({ matrix })
 }
+export const setProfileToken = (store, profileToken) => {
+  store.setState({ profileToken })
+}
 export const setTitle = (store, title) => {
   store.state.level.title = title  
 }

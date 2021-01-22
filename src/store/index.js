@@ -23,7 +23,7 @@ const initialState = {
   levelIdx: 0,
   matrix: [],
   PPP: 0,
-  profileToken: ''
+  profileToken: {}
 }
 
 const useGlobal = useGlobalHook(React, initialState, actions);

@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Dialer } from './Dialer/Dialer'
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid } from '@material-ui/core'
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Grid } from '@material-ui/core'
 import { Terminus } from '../Terminus/Terminus'
 import useGlobal from '../../store'
 import { useHistory } from 'react-router-dom'
@@ -42,43 +42,44 @@ export function Matrix() {
   const [globalState, globalActions] = useGlobal()
   let history = useHistory()
   
-  function Levels() {
-    if (globalState.matrix.length > 0) {
-      return (<Grid container className={classes.root} spacing={2}>
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={2}>
-            {globalState.matrix.map((level) => (
-              <Grid key={level.key} item>
-                <Card className={classes.paper} onClick={() => {
-                  globalActions.setLevel(level)
-                  history.push("/level")
-                }}>
-                  <CardHeader
-                    avatar={
-                      <Avatar aria-label="recipe" className={classes.avatar}>
-                        R
-                      </Avatar>
-                    }          
-                    title={level.title}
-                    subheader={level.title}
-                  />
-                  <CardMedia
-                    className={classes.media}
-                    image={level.cover}
-                    title="Paella dish"
-                  />
-                  <CardContent>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+  if (globalState.matrix.length > 0) {
+    return (<Grid container className={classes.root} spacing={2}>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={2}>
+          {globalState.matrix.map((level) => (
+            <Grid key={level.key} item>
+              <Card className={classes.paper} onClick={() => {
+                globalActions.setLevel(level)
+                history.push("/level")
+              }}>
+                <CardHeader
+                  avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                      R
+                    </Avatar>
+                  }          
+                  title={level.title}
+                  subheader={level.title}
+                />
+                <CardMedia
+                  className={classes.media}
+                  image={level.cover}
+                  title="Paella dish"
+                />
+                <CardContent>
+                </CardContent>
+                <CardActions disableSpacing>
+
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
-      </Grid>)
-    }
-    return (null)
+      </Grid>
+    </Grid>)
   }
-  return (<><Terminus children={<><Levels /><Dialer/></>} /></>)
+  return (null)
+  
 }
 
 export default Matrix
