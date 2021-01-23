@@ -2,14 +2,14 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types';
-import { AppBar, Box, Button, Fab, Container, Dialog, DialogContent, Divider, Paper, Tabs, Tab, TextField } from '@material-ui/core';
-
+import { AppBar, Box, Button, Fab, Container, Dialog, DialogContent, Tabs, Tab, TextField } from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { CodeJson, ContentSaveCog, DataMatrixPlus, Upload as UploadIcon } from 'mdi-material-ui'
+import { CodeJson, DataMatrixPlus, ImageText, Upload as UploadIcon } from 'mdi-material-ui'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useGlobal from '../../store'
 import { v4 as uuidv4 } from 'uuid'
+
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -89,7 +89,7 @@ export function Upload() {
       globalActions.addLevel(fileValue)
       history.push('/level')
     }
-  }, [fileValue])
+  }, [fileValue, globalActions, history])
 
 
   const collateHtmlChange = (event) => {
@@ -119,9 +119,9 @@ export function Upload() {
     const {getRootProps, getInputProps} = useDropzone({onDrop})
   
     return (
-      <div {...getRootProps()}>
+      <div {...getRootProps()}>        
         <input {...getInputProps()} />
-        Drag 'n' drop some Matrix files here, or click to select files      
+        Drag 'n' drop some Matrix files here, or click to select files            
       </div>
     )
   }
@@ -157,6 +157,7 @@ export function Upload() {
   const keyDownJsonUrl = (event) => {
     if (event.keyCode === 13) {
       let jsonUrl = event.target.value
+      
       fetch(jsonUrl).then(function(response) {
         return response.json()
       }).then(function(data) {
@@ -177,7 +178,7 @@ export function Upload() {
         onClose={handleDialogClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">{"Pick Inload Uplink"}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{"Load Game via...?"}</DialogTitle>
         <DialogContent>
           <AppBar position="static" color="default">
             <Tabs value={tabValue} onChange={handleTabChange}
@@ -185,9 +186,9 @@ export function Upload() {
               indicatorColor="primary"
               textColor="primary"
               aria-label="scrollable force tabs example">
-              <Tab label="Json cors" {...a11yProps(0)} icon={<CodeJson />} />
-              <Tab label="Collate Html" {...a11yProps(1)} icon={<ContentSaveCog />} />
-              <Tab label="Import Matrix" {...a11yProps(2)} icon={<DataMatrixPlus /> }/>
+              <Tab label="Cloud Network" {...a11yProps(0)} icon={<CodeJson />} />
+              <Tab label="Compile HyperText" {...a11yProps(1)} icon={<ImageText />} />
+              <Tab label="Collate Record" {...a11yProps(2)} icon={<DataMatrixPlus /> }/>
             </Tabs>
           </AppBar>
           <TabPanel value={tabValue} index={0}> 
