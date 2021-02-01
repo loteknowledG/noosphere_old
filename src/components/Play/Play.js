@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { Card, CardActionArea, CardMedia, Grid } from '@material-ui/core'
-import { Cookie } from './Cookie/Cookie'
+import useGlobal from '../../store'
 import { makeStyles } from '@material-ui/core/styles'
-import { motion } from 'framer-motion'
-import useGlobal from '../../../store'
 import { useHistory } from 'react-router-dom'
-import { Dialer } from './Dialer/Dialer'
-import { useWindowDimensions } from  '../../../hooks/useWindowDimensions'
+import { useWindowDimensions } from  '../../hooks/useWindowDimensions'
+import { Cookie } from './Cookie/Cookie'
+import { motion } from 'framer-motion'
+import { Controller } from './Controller/Controller'
 import { useViewport } from 'react-viewport-hooks';
+import { Bases } from './Bases'
 
 const useStyles = makeStyles((theme) => ({
   framer: {
@@ -29,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
     height: '10%',
     width: '10%',
   }
+  
 }))
 
-export function Game (props) {  
+export function Play (props) {  
   const [globalState, globalActions] = useGlobal()
   const history = useHistory()
   const { height, width } = useWindowDimensions()
@@ -43,7 +45,7 @@ export function Game (props) {
   const classes = useStyles();
   const [momentIdx, setMomentIdx] = useState(0)
   const [ppp, setPpp] = useState(0)
-  const constraintsRef = useRef();    
+  const constraintsRef = useRef();  
 
   function handlePP(pp) {
     setPpp(ppp + pp) 
@@ -52,9 +54,10 @@ export function Game (props) {
       setPpp(0)
     }    
   }
-  
+
   return (
     <>
+      <Bases />
       <Grid container justify="center" className={classes.grid} ref={constraintsRef}>
           <Card>
             <CardActionArea >
@@ -69,9 +72,10 @@ export function Game (props) {
           </Card>        
       </Grid>
       <motion.div className={classes.drag} drag dragConstraints={constraintsRef} >
-        <Dialer ppp={ppp} />
+        <Controller ppp={ppp} />
       </motion.div>      
     </>
     )
-
 }
+export default Play
+

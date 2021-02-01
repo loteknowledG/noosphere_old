@@ -12,13 +12,27 @@ const initialState = {
     }]
   },
   level: {
-    title: 'Add a title',
+    agent: 'Add agent',
+    title: 'Add title',
     key: uuidv4(),
     cover: '',
     pix: [{
       key: uuidv4(),
       src: ''
     }]
+  },
+  now: {
+    play: {
+      agent: 'Add agent',
+      title: 'Add title',
+      key: uuidv4(),
+      cover: '',
+      pix: [{
+        key: uuidv4(),
+        src: ''
+      }]
+    }
+
   },
   levelIdx: 0,
   matrix: [],

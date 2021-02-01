@@ -1,15 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles'
 import { Box, CircularProgress, Typography } from '@material-ui/core'
-import {useSpring, animated} from 'react-spring'
-import './dialer.css'
+import './controller.css'
 
 function CircularProgressWithLabel(props) {
   return (
     <Box position="relative" display="inline-flex">
-      <CircularProgress variant="static" {...props} />
+      <CircularProgress variant="determinate" {...props} />
       <Box
         top={0}
         left={0}
@@ -36,7 +34,7 @@ CircularProgressWithLabel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export function Dialer (props) {  
+export function Controller (props) {  
   const [progress, setProgress] = React.useState(100);
   const { ppp } = props
 
@@ -81,4 +79,4 @@ export function Dialer (props) {
     </svg>
   </>)
 }
-export default Dialer
+export default Controller
