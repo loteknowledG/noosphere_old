@@ -2,10 +2,10 @@ import React from 'react'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { overrideThemeVariables } from 'ui-neumorphism'
-import { LeveL } from './components/Matrix/LeveL/LeveL'
 import { Magazine } from './components/Magazine/Magazine'
 import { Matrix } from './components/Matrix/Matrix'
 import { Play } from './components/Play/Play'
+import { Tune } from './components/Matrix/Tune'
 import { Terminus } from './components/Terminus/Terminus'
 import './App.css'
 import 'typeface-roboto'
@@ -27,11 +27,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HashRouter basename="/">
-        <Switch>
-          <Route exact path="/level" component={LeveL} />     
+        <Switch>    
           <Route exact path="/magazine" component={Magazine} />                
           <Route exact path="/matrix" component={Matrix} />
           <Route exact path="/play" component={Play} />
+          <Route exact path="/tune" component={Tune} />
           <Route path="/" component={Terminus} />
         </Switch>
       </HashRouter>

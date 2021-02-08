@@ -1,7 +1,6 @@
 import React from "react";
 import useGlobalHook from "use-global-hook"
 import * as actions from "../actions"
-import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   dialer: {
@@ -14,25 +13,31 @@ const initialState = {
   level: {
     agent: 'Add agent',
     title: 'Add title',
-    key: uuidv4(),
+    key: '',
     cover: '',
     pix: [{
-      key: uuidv4(),
+      key: '',
       src: ''
     }]
   },
-  now: {
+  now: {    
     play: {
-      agent: 'Add agent',
-      title: 'Add title',
-      key: uuidv4(),
-      cover: '',
+      agent: 'Add agent',      
+      cover: '',      
+      key: '',      
       pix: [{
-        key: uuidv4(),
+        key: '',
         src: ''
-      }]
+      }],
+      title: 'Add title',
+    },
+    player: {
+      PPP: 0
+    },
+    tune: { 
+      key: '',
+      src: ''
     }
-
   },
   levelIdx: 0,
   matrix: [],

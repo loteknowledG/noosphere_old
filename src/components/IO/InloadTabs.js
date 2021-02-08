@@ -21,7 +21,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -87,7 +87,6 @@ export function InloadTabs(props) {
       })
     }, [])
     const {getRootProps, getInputProps} = useDropzone({onDrop})
-  
     return (
       <div {...getRootProps()}>        
         <input {...getInputProps()} />
@@ -118,7 +117,7 @@ export function InloadTabs(props) {
         return pix
       })
       play.cover = play.pix[0].src
-      globalActions.addLevel(play)
+      globalActions.addPlay(play)
       props.handleDialogClose()
       props.handleSpeedDialClick()
     }
