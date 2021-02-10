@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@material-ui/core';
 import { SafeSquareOutline, Menu, Post, Rss } from 'mdi-material-ui'
@@ -68,6 +68,8 @@ export function Navigator(props) {
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  
+  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

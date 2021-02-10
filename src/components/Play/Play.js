@@ -57,9 +57,7 @@ export function Play (props) {
       }
     }
   })
-
-
-  console.log(vw)
+  
   useEffect(() => {
     const timer = setInterval(() => {
       progressRef.current()
@@ -97,8 +95,7 @@ export function Play (props) {
               <img alt="" 
                 className={classes.moment} 
                 src={globalState.now.play.pix[momentIdx].src}
-              >              
-              </img>
+              />                            
               </Cookie>
             </CardActionArea>          
           </Card>        

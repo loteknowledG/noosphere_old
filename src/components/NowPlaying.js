@@ -1,8 +1,8 @@
 import React from 'react'
 import useGlobal from '../store'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Button, Card, CardActions, CardActionArea, CardHeader, CardContent, CardMedia, Grid, IconButton, Typography } from '@material-ui/core'
+import { Avatar, Card, CardActionArea, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core'
 import BuildIcon from '@material-ui/icons/Build'
 // import { Button, Card, CardContent, H6 } from 'ui-neumorphism'
 // import { Box, Flex, Spacer } from "@chakra-ui/react"
