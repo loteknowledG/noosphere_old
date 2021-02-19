@@ -1,29 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardContent, CardMedia, Fab, Grid, Paper } from '@material-ui/core';
-import { useFetch } from '../../hooks'
-import { Plus } from 'mdi-material-ui';
+import Peer from 'peerjs';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(7),
-    right: theme.spacing(7),
-  },
-  paper: {
-    height: 345,
-    width: 345,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));                                                                 
+                                                            
                                       /*    ,,                                
    .M"""bgd                         `7MM    db                   mm           
   ,MI    "Y                           MM                         MM           
@@ -35,49 +13,29 @@ const useStyles = makeStyles((theme) => ({
             ,V                                                                
          OO*/                                                                       
 export function Syndicate(props) {
-  const classes = useStyles()
-
-  function list() {
-    // if (window.gapi.client.drive) {
-    //   return window.gapi.client.drive.files.list({})
-    //     .then(function(response) {
-    //       // Handle the results here (response.result has the parsed body).
-    //       let matrix = response.result.files.find(file => {
-    //         return file.name === '23407 matrix'                      
-    //       })
-    //       // 23407 matrix found
-    //       if (matrix) {
-    //         return matrix
-    //       } else { // create 23407
+  // const peer = new Peer('receiver', { host: 'localhost', port: 9000, path: '/' })
+  const peer = new Peer(''+Math.floor(Math.random()*2**18).toString(36).padStart(4,0), {
+    host: 'https://0.peerjs.com',//location.hostname,
+    debug: 1,
+    port: 443,
+    path: '/'
+});
+    peer.on('connection', (conn) => {
+    conn.on('data', (data) => {
+      console.log(data);
+    })
+  })
   
-    //       }
-    //       console.log(matrix)
-    //     },
-    //     function(err) { console.error("Execute error", err) })
-    // } else {
-    //   return []
-    // }
-  }/*
-   _     _  _    _|_ _ 
-  (/_>< (/_(_ |_| |_(/_
-*/list()
+
+  const peer1 = new Peer('sender', { host: 'localhost', port: 9000, path: '/' })
+
+  const conn = peer1.connect('receiver')
+
+  conn.on('open', () => {
+    conn.send('hi!')
+  })
   return (
-      <>
-        <Fab className={classes.fab} color="primary" aria-label="add">
-          <Plus />
-        </Fab>
-        <Grid container className={classes.root} spacing={2}>
-          <Grid item xs={12}>
-            <Grid container justify="center" spacing={2}>
-              {[0, 1, 2, 3, 4 ].map((value) => (
-                <Grid key={value} item>
-                  <Card className={classes.paper} />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Grid>
-      </>
+      null
   )
 }
 

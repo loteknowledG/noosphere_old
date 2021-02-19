@@ -4,13 +4,13 @@ import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Card, CardActionArea, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core'
 import BuildIcon from '@material-ui/icons/Build'
+import { Link } from 'react-router-dom'
 // import { Button, Card, CardContent, H6 } from 'ui-neumorphism'
 // import { Box, Flex, Spacer } from "@chakra-ui/react"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: '25px'
   },
   fab: {
     position: 'absolute',
@@ -46,27 +46,30 @@ export function NowPlaying() {
                       </Avatar>
                     }
                     action={
+                      <Link to={"/matrix"} style={{ textDecoration: 'none' }} >
                         <IconButton aria-label="matrix" onClick={() => {
                           globalActions.setPlay(play)
                           history.push('/matrix')
                         }}>
                           <BuildIcon />
                         </IconButton>
+                      </Link>
                     }
                     title={play.title}                  
                   />
-                  <CardActionArea onClick={() => {
-                      globalActions.setPlay(play)
-                      history.push('/play')
-                  }}>
-                    <CardMedia
-                      component="img"
-                      alt={play.title}
-                      image={play.cover} 
-                      title={play.title}
-                      height={400}                      
-                    />
-                  </CardActionArea>                
+                  <Link to={"/play"} style={{ textDecoration: 'none' }}>
+                    <CardActionArea onClick={() => {
+                        globalActions.setPlay(play)
+                    }}>
+                      <CardMedia
+                        component="img"
+                        alt={play.title}
+                        image={play.cover} 
+                        title={play.title}
+                        height={400}                      
+                      />
+                    </CardActionArea>  
+                  </Link>              
                 </Card>             
               </Grid>
             ))}

@@ -54,10 +54,10 @@ export function Controller (props) {
         <span className="hamburger hamburger-2"></span>
         <span className="hamburger hamburger-3"></span>
       </label>      
-      <a href="#" className="menu-item"><CircularProgressWithLabel size={80} value={progress} ><i className="fa fa-bar-chart"></i></CircularProgressWithLabel> </a>      
-      <a href="#" className="menu-item"><CircularProgress size={80} variant="determinate" value={progress} ><i className="fa fa-plus"></i></CircularProgress> </a>
-      <a href="#" className="menu-item"> <i className="fa fa-heart"></i> </a>
-      <a href="#" className="menu-item"> <i className="fa fa-envelope"></i> </a>      
+      <a className="menu-item"><CircularProgressWithLabel size={80} value={progress} ><i className="fa fa-bar-chart"></i></CircularProgressWithLabel> </a>      
+      <a className="menu-item"><CircularProgress size={80} variant="determinate" value={progress} ><i className="fa fa-plus"></i></CircularProgress> </a>
+      <a className="menu-item" onClick={() => {console.log('hey')}}> <i className="fa fa-heart" ></i> </a>
+      <a className="menu-item"> <i className="fa fa-envelope"></i> </a>      
     </nav>    
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>

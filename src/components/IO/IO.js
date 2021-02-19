@@ -73,8 +73,7 @@ export function IO () {
         fullScreen={fullScreen}
         open={dialogOpen}
         onClose={handleDialogClose}
-        aria-labelledby="responsive-dialog-title"
-      >
+        aria-labelledby="responsive-dialog-title">
         <DialogTitle id="responsive-dialog-title">
           { tabNotHidden === "Inload" && "Choose inload protocol" }      
         </DialogTitle>
