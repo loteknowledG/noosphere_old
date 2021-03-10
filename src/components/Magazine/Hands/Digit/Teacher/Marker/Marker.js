@@ -1,4 +1,4 @@
-import React, { useGlobal } from "reactn";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { motion } from "framer-motion";
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -43,19 +43,19 @@ import { Grid, TextField } from '@material-ui/core';
   }));
   const { id, image, selected } = props;
   const classes = useStyles();
-  const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");
-  const [markers, setMarkers] = useGlobal("markers");
+  // const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");
+  // const [markers, setMarkers] = useGlobal("markers");
   
   // 23407-1337
   // >3407-1337
 
   function onDragEnd(event, info) {
-    const marker = markers[id];
-    marker.id = id;
-    marker.pageX = event.pageX;
-    marker.pageY = event.pageY;
-    marker.image = image;
-    setSelectedMarker(id);
+    // const marker = markers[id];
+    // marker.id = id;
+    // marker.pageX = event.pageX;
+    // marker.pageY = event.pageY;
+    // marker.image = image;
+    // setSelectedMarker(id);
   }
 
   const style = {
@@ -66,9 +66,9 @@ import { Grid, TextField } from '@material-ui/core';
   
   
   const top100Films = [
-    { title: 'Pussy' },
-    { title: 'Tits' },
-    { title: 'Ass' },
+    { title: 'bill & ted' },
+    { title: '40k' },
+    { title: 'warhammer' },
     
   ];
   return (

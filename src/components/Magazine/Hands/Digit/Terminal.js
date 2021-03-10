@@ -1,4 +1,4 @@
-import React, { useState, useGlobal } from 'reactn'
+import React, { useState } from 'react'
 import { Button, Dialog, DialogContent, DialogContentText, DialogActions, DialogTitle, Fab, ListItem, ListItemIcon, ListItemText, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Draggable from 'react-draggable';
@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 / /  ((____   //      // / /  / / / / //   / / ((___( ( */     
 export function Terminal (props) {
     const classes = useStyles();       
-    const [profileToken, setProfileToken] = useGlobal('profileToken')
+    // const [profileToken, setProfileToken] = useGlobal('profileToken')
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
         setOpen(true);
@@ -41,9 +41,9 @@ export function Terminal (props) {
         setOpen(false);
     };
     const showMsg = () => 'Hello World'
-    if (profileToken === undefined) {
-        return (<div></div>)
-    } else {
+    // if (profileToken === undefined) {
+    //     return (<div></div>)
+    // } else {
         return (    
             <div>
                 <ListItem button onClick={handleClickOpen}>
@@ -94,5 +94,5 @@ export function Terminal (props) {
                 </Dialog>
             </div>
         )
-    }
+    // }
 }

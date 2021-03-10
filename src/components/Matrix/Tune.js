@@ -1,37 +1,48 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect, useState, useRef } from 'react'
+import { Card, CardActionArea, Grid, LinearProgress } from '@material-ui/core'
+import { motion } from "framer-motion";
 import useGlobal from '../../store'
 import { makeStyles } from '@material-ui/core/styles'
-import Gallery from "react-photo-gallery"
 
 const useStyles = makeStyles((theme) => ({
-  framer: {
-    height: "calc(90vh)",
-    width: "calc(80vw)"
-  },
   moment: {
-    height: "calc(100vh)",
-    // '&:-webkit-user-select': 'none',  /* Chrome all / Safari all */
-    // '&:-moz-user-select': 'none',     /* Firefox all */
-    // '&:-ms-user-select': 'none',      /* IE 10+ */
-    // '&:-user-select': 'none' ,    
+    height: "calc(100vh)",  
   },
   grid: {
     position: 'fixed',
     overflow: 'hidden'
   },
-  drag: {
-    height: '10%',
-    width: '10%',
+  marker: {
+    background: 'white',
+    borderRadius: 30,
+    width: 150,
+    height: 150,
+    position: 'absolute',
+    top: 'calc(50% - 150px / 2)',
+    left: 'calc(50% - 150px / 2)'
   }
   
 }))
 
 export function Tune () {
-  
+  const classes = useStyles();
+  const constraintsRef = useRef(null);
   const [globalState, globalActions] = useGlobal()
-  return (
-    <>
-    </>
-  )
+  const pic = globalActions.getTune()
+  if (pic) {
+    return (<>
+      <Grid container justify="center" className={classes.grid}>
+      <Card>
+          <motion.div className="drag-area" ref={constraintsRef} >
+            <img alt="" 
+              className={classes.moment} 
+              src={pic.src}
+            />                  
+          </motion.div>     
+          <motion.div className="marker" drag dragConstraints={constraintsRef} />     
+        </Card> 
+      </Grid>
+    </>)
+  }
+  return (null)
 }

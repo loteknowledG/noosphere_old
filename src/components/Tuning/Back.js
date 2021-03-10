@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { ArrowLeft } from 'mdi-material-ui'
@@ -17,7 +16,7 @@ export function Back () {
   const classes = useStyles();
   return (
     <>
-      <Link to={"/nowPlaying"} style={{ textDecoration: 'none' }}>
+      <Link to={"/matrix"} style={{ textDecoration: 'none' }}>
         <Fab aria-label="back" className={classes.back}>
           <ArrowLeft />
         </Fab>

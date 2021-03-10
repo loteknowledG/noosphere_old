@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useGlobal, useRef } from 'reactn'
+import React, { useEffect, useState, useRef } from 'react'
+import useGlobal from '../../../store'
 import { makeStyles } from '@material-ui/core/styles'
 import { Card, CardActionArea, CardMedia, Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
@@ -40,13 +41,15 @@ export function Mattereal(props) {
   const [idx, setIdx] = useState(0)
   const [pp, setPP] = useState(0)
   const classes = useStyles();
-  const [markers, setMarkers] = useGlobal('markers');
-  const [selectedMarker, setSelecteMarker] = useGlobal('selectedMarker')  
+  const [markers, setMarkers] = useState([])
+  const [selectedMarker, setSelectedMarker] = useState({})
+  // const [markers, setMarkers] = useGlobal('markers');
+  // const [selectedMarker, setSelecteMarker] = useGlobal('selectedMarker')  
   const constraintsRef = useRef(null);
   
   useEffect(() => {
     // Update the document title using the browser API
-    setMarkers(props.markers)
+    // setMarkers(props.markers)
   }, [props.markers]);
 
   function onClick () {

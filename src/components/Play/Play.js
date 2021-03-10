@@ -9,13 +9,10 @@ import { motion } from 'framer-motion'
 import { Controller } from './Controller/Controller'
 import { useViewport } from 'react-viewport-hooks';
 import { Bases } from './Bases'
+import { Back } from './Back'
+import useInterval from 'use-interval'
 
-const useStyles = makeStyles((theme) => ({
-  back: {
-    position: 'fixed',
-    top: theme.spacing(3),
-    right: theme.spacing(3),
-  },
+const useStyles = makeStyles((theme) => ({  
   framer: {
     height: "calc(90vh)",
     width: "calc(80vw)"
@@ -74,6 +71,7 @@ export function Play () {
 
   const classes = useStyles();
   const [momentIdx, setMomentIdx] = useState(0)
+  const [monentIdxs, setMomentIdxs] = useState([0, 1])
   const [ppp, setPpp] = useState(0)
   const constraintsRef = useRef();  
 
@@ -81,9 +79,12 @@ export function Play () {
     setPpp(ppp + pp) 
     if (ppp >= 100) {
       setMomentIdx(momentIdx + 1)
+      setMomentIdxs([momentIdx + 1, momentIdx + 2])
       setPpp(0)
     }    
   }
+
+
 
   return (
     <>      
@@ -102,7 +103,8 @@ export function Play () {
       </Grid>
       <motion.div className={classes.drag} drag dragConstraints={constraintsRef} >
         <Controller ppp={ppp} />
-      </motion.div>      
+      </motion.div>    
+      <Back />  
     </>
   )
 }

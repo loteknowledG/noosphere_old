@@ -38,13 +38,6 @@ const styles = (theme) => ({
     color: theme.palette.grey[500],
   },
 })
-// const actions = [
-//   { icon: <CloudDownload />, name: 'Download'}, 
-//   { icon: <ContentSave />, name: 'Save' },
-//   { icon: <UploadMultiple />, name: 'Upload'}
-// ];
-
-
 
 export function Dialer (props) { 
   const classes = useStyles();

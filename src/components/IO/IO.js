@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Backdrop, Dialog, DialogActions, DialogContent, DialogTitle, useMediaQuery } from '@material-ui/core';
+import { Backdrop, Dialog, DialogActions, DialogContent, DialogTitle, useMediaQuery } from '@material-ui/core';
 import { SpeedDial, SpeedDialIcon, SpeedDialAction} from '@material-ui/lab';
 import { CloudUploadOutline, Download, ImageMultipleOutline, SafeSquareOutline, SafeSquare  } from 'mdi-material-ui'
 import { useTheme } from '@material-ui/core/styles';

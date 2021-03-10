@@ -5,7 +5,7 @@ import { NowPlaying } from './components/NowPlaying'
 import { Magazine } from './components/Magazine/Magazine'
 import { Matrix } from './components/Matrix/Matrix'
 import { Navigator } from './components/Navigator'
-import { Tune } from './components/Matrix/Tune'
+import { Tuning } from './components/Tuning/Tuning'
 import { Syndicate } from './components/Syndicate/Syndicate'
 import { Play } from './components/Play/Play'
 import { Back } from './components/Play/Back'
@@ -19,22 +19,25 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <HashRouter basename="/">
         <Switch>    
-          <Route exact path="/magazine" component={Magazine} />                
+          <Route exact path="/magazine">
+            <Magazine />
+          </Route>                
           <Route exact path="/matrix" component={Matrix} />            
           <Route exact path="/nowPlaying" >
-            <Navigator />
             <NowPlaying />   
+            <Navigator />
             <IO />           
           </Route>
           <Route exact path="/play">              
             <Play />
-            <Back/>
           </Route>              
-          <Route exact path="/tune" component={Tune} />
+          <Route exact path="/tuning">
+            <Tuning />
+          </Route>
           <Route exact path="/syndicate" component={Syndicate} />
           <Route path="/" >
-          <Navigator />
             <NowPlaying />
+            <Navigator />
             <IO />
           </Route>
         </Switch>

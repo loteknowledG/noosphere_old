@@ -42,7 +42,9 @@ const initialState = {
   levelIdx: 0,
   matrix: [],
   PPP: 0,
-  profileToken: {}
+  profileToken: {},
+  markers: []
+
 }
 
 const useGlobal = useGlobalHook(React, initialState, actions);

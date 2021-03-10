@@ -1,4 +1,4 @@
-import React, { useState, useGlobal } from 'reactn'
+import React, { useState } from 'react'
 import { withStyles, makeStyles } from '@material-ui/core/styles'
 import { Card, CardContent, CardHeader, IconButton, Slider } from '@material-ui/core'
 import { Tag } from './Tag'
@@ -25,8 +25,8 @@ const useStyles = makeStyles(theme => ({
                            ░*/                                
 export function Watcher (props) {
   const classes = useStyles();  
-  const [markers, setMarkers] = useGlobal('markers')  
-  const [selectedMarker, setSelectedMarker] = useGlobal('selectedMarker')
+  // const [markers, setMarkers] = useGlobal('markers')  
+  // const [selectedMarker, setSelectedMarker] = useGlobal('selectedMarker')
 
   const PrettoSlider = withStyles({
       root: {
@@ -58,55 +58,55 @@ export function Watcher (props) {
       }
   })(Slider);
 
-  function handleChangeHeight (event, value) {
-    const marker = markers[selectedMarker]
-    marker.height = value   
-    setMarkers(markers)
-  }
+  // function handleChangeHeight (event, value) {
+  //   const marker = markers[selectedMarker]
+  //   marker.height = value   
+  //   setMarkers(markers)
+  // }
 
-  function handleChangeWidth (event, value) {
-    const marker = markers[selectedMarker]
-    marker.width = value
-    setMarkers(markers)
-  }
+  // function handleChangeWidth (event, value) {
+  //   const marker = markers[selectedMarker]
+  //   marker.width = value
+  //   setMarkers(markers)
+  // }
 
-  function handleToylet (event) {
-    setMarkers(markers.filter((marker) => marker.id !== selectedMarker))
-    setSelectedMarker(undefined)
-  }
-  if (markers && selectedMarker !== undefined) {
-    const marker = markers[selectedMarker]
-    return (
-      <Card className={ classes.card }>
-        <CardHeader 
-          title={ marker.lession }
-          action={
-            <IconButton aria-label="toylet" className={classes.margin} onClick={handleToylet}>
-              <Toilet />
-            </IconButton>
-          }
-        />  
-        <CardContent>
-          height
-          <PrettoSlider 
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            defaultValue={marker ? marker.height : 100} 
-            max={600} 
-            onChangeCommitted={ handleChangeHeight }
-          />
-          width
-          <PrettoSlider 
-            valueLabelDisplay="auto" 
-            aria-label="pretto slider" 
-            defaultValue={marker ? marker.width : 100} 
-            max={600} 
-            onChangeCommitted={ handleChangeWidth }
-          />          
-        </CardContent>
-      </Card> 
-    )
-  } else {
+  // function handleToylet (event) {
+  //   setMarkers(markers.filter((marker) => marker.id !== selectedMarker))
+  //   setSelectedMarker(undefined)
+  // }
+  // if (markers && selectedMarker !== undefined) {
+  //   const marker = markers[selectedMarker]
+  //   return (
+  //     <Card className={ classes.card }>
+  //       <CardHeader 
+  //         title={ marker.lession }
+  //         action={
+  //           <IconButton aria-label="toylet" className={classes.margin} onClick={handleToylet}>
+  //             <Toilet />
+  //           </IconButton>
+  //         }
+  //       />  
+  //       <CardContent>
+  //         height
+  //         <PrettoSlider 
+  //           valueLabelDisplay="auto" 
+  //           aria-label="pretto slider" 
+  //           defaultValue={marker ? marker.height : 100} 
+  //           max={600} 
+  //           onChangeCommitted={ handleChangeHeight }
+  //         />
+  //         width
+  //         <PrettoSlider 
+  //           valueLabelDisplay="auto" 
+  //           aria-label="pretto slider" 
+  //           defaultValue={marker ? marker.width : 100} 
+  //           max={600} 
+  //           onChangeCommitted={ handleChangeWidth }
+  //         />          
+  //       </CardContent>
+  //     </Card> 
+  //   )
+  // } else {
     return (<></>)
-  }
+  // }
 }

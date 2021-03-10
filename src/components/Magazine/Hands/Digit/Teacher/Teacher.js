@@ -1,4 +1,4 @@
-import React, { useState, useGlobal } from "reactn"
+import React, { useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Teach, FileExport } from 'mdi-material-ui'
 import { Fab, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, WhoIsNext } from "@material-ui/core"
@@ -31,11 +31,12 @@ export function Teacher(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [lession, setLession] = useState("");
-  const [markers, setMarkers] = useGlobal("markers");
-  const [markerSize, setMarkerSize] = useGlobal("markerSize");
+  const [markers, setMarkers] = useState([])
+  // const [markers, setMarkers] = useGlobal("markers");
+  // const [markerSize, setMarkerSize] = useGlobal("markerSize");
   const [open, setOpen] = React.useState(false);
-  const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");  
-  const [profileToken, setProfileToken] = useGlobal('profileToken')
+  // const [selectedMarker, setSelectedMarker] = useGlobal("selectedMarker");  
+  // const [profileToken, setProfileToken] = useGlobal('profileToken')
 
   const handleClick = event => {
     if (markers) {
@@ -69,49 +70,49 @@ export function Teacher(props) {
   const handleSelect = lession => {
     setLession(lession);
     setAnchorEl(null);
-    if (markers) {
-      markers.push({
-        lession: lession,
-        height: 100,
-        width: 100
-      });
-      setMarkers(markers);
-    } else {
-      setMarkers([
-        {
-          lession: lession,
-          height: 100,
-          width: 100
-        }
-      ]);
-    }
+    // if (markers) {
+    //   markers.push({
+    //     lession: lession,
+    //     height: 100,
+    //     width: 100
+    //   });
+    //   setMarkers(markers);
+    // } else {
+    //   setMarkers([
+    //     {
+    //       lession: lession,
+    //       height: 100,
+    //       width: 100
+    //     }
+    //   ]);
+    // }
   };
-  const onSave = () => {
-    if (markers) {
-      const fileStream = streamSaver.createWriteStream("teacher.giz", {
-        size: 22, // (optional) Will show progress
-        writableStrategy: undefined, // (optional)
-        readableStrategy: undefined // (optional)
-      });
-      if (fileStream) {
-        new Response(
-          `{ 
-            "header": { 
-                "girl": "Ashlee Cox",
-                "event": "",
-                "type": "teacHer"
-            },     
-            "markers": ${JSON.stringify(markers)} 
-          }`
-        ).body.pipeTo(fileStream);
-      }
-    }
-    setOpen(false);
-  };
+  // const onSave = () => {
+  //   if (markers) {
+  //     const fileStream = streamSaver.createWriteStream("teacher.giz", {
+  //       size: 22, // (optional) Will show progress
+  //       writableStrategy: undefined, // (optional)
+  //       readableStrategy: undefined // (optional)
+  //     });
+  //     if (fileStream) {
+  //       new Response(
+  //         `{ 
+  //           "header": { 
+  //               "girl": "Ashlee Cox",
+  //               "event": "",
+  //               "type": "teacHer"
+  //           },     
+  //           // "markers": ${JSON.stringify(markers)} 
+  //         }`
+  //       ).body.pipeTo(fileStream);
+  //     }
+  //   }
+  //   setOpen(false);
+  // };
   
-  if (profileToken === undefined) {
-        return (<div></div>)
-    } else {
+  // if (profileToken === undefined) {
+  //       return (<div></div>)
+  //   } else {
       return (
         
         <div>
@@ -123,5 +124,5 @@ export function Teacher(props) {
           </ListItem>       
         </div>
       )
-    }
+    // }
 }

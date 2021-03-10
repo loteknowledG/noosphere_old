@@ -1,17 +1,21 @@
 import React, {useState} from 'react'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@material-ui/core'
+import { AppBar, Button, Collapse, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@material-ui/core'
 // import {  } from '@material-ui/icons'
-import { ChevronLeft, Menu, PlayBoxMultipleOutline, Rss, SafeSquareOutline } from 'mdi-material-ui'
+import { ChevronLeft, LoginVariant, Menu, PlayBoxMultipleOutline, Rss, SafeSquareOutline } from 'mdi-material-ui'
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
 import { Link } from 'react-router-dom'
-
+import CollapseOnScroll from './CollapseOnScroll'
+import SignIn from './SignIn'
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -58,9 +62,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    display: 'flex',    
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -73,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     fontFamily: 'monospace',
     fontSize: 7,
-    // marginBotton: 7,
     position: 'relative',
     whiteSpace: 'pre',
   },
@@ -87,52 +88,40 @@ const useStyles = makeStyles((theme) => ({
       '0 0 40px #9D33FF,' +
       '0 0 50px #9D33FF'   
   },
+
 }))
 
 export function Navigator() {
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
-
-  const handleListItemClick = (event, idx, text) => {
-     
-  }
-
-  const contentStyle = { transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' }
-  if (open) {
-    contentStyle.marginLeft = 240
-  }
+ 
 
   return (    
     <div className={classes.root}>
       <CssBaseline />
+      
       <AppBar
         color="transparent" elevation={0} position="fixed" 
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: drawerOpen,
         })}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={()=>setDrawerOpen(true)}
             edge="start"
             className={clsx(classes.menuButton, {
-              [classes.hide]: open,
+              [classes.hide]: drawerOpen,
             })}>
             <Menu />
           </IconButton>
-{/* <pre className={`${classes.brandText} ${classes.neon}`}> 
+          <CollapseOnScroll>
+<pre className={`${classes.brandText} ${classes.neon}`}> 
 888b    |   ,88~~\     ,88~~\                    888                                <br/> 
 |Y88b   |  d888   \   d888   \   d88~\ 888-~88e  888-~88e  e88~~8e  888-~\  e88~~8e <br/>
 | Y88b  | 88888    | 88888    | C888   888  888b 888  888 d888  88b 888    d888  88b<br/>
@@ -140,24 +129,27 @@ export function Navigator() {
 |   Y88b|  Y888   /   Y888   /    888D 888  888P 888  888 Y888    , 888    Y888    ,<br/>
 |    Y888   `88__/     `88__/   \_88P  888-_88"  888  888  "88___/  888     "88___/ <br/>
 |                                      888                                          <br/>                      
-</pre>   */}
+</pre>
+<SignIn />
+        </CollapseOnScroll>
         </Toolbar>
       </AppBar>
+      
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: drawerOpen,
+          [classes.drawerClose]: !drawerOpen,
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: drawerOpen,
+            [classes.drawerClose]: !drawerOpen,
           }),
         }}>
         <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {open ?  <ChevronLeft /> : null }
+          <IconButton onClick={()=>setDrawerOpen(false)}>
+            {drawerOpen ?  <ChevronLeft /> : null }
           </IconButton>
         </div>
         <Divider />
@@ -169,16 +161,40 @@ export function Navigator() {
         ].map((item, idx) => (
           <Link to={"/" + item.text} style={{ textDecoration: 'none' }}>
             <ListItem 
-              button 
+              button               
               selected={selectedIndex === idx}
               key={item.text} 
               onClick={(event) => { setSelectedIndex(idx) }}
             >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem> 
           </Link>
         ))}
+       {/* </List>
+          <Link to="/NowPlaying" style={{ textDecoration: 'none' }}>
+            <ListItem 
+              button               
+              selected={selectedIndex === 0}
+              key="NowPlaying" 
+              onClick={(event) => { setSelectedIndex(0) }}>
+              <ListItemIcon><PlayBoxMultipleOutline /></ListItemIcon>
+              <ListItemText primary="Now Playing" />
+            </ListItem>
+          </Link>
+          <Link to="/Syndicate" style={{ textDecoration: 'none' }}>
+            <ListItem 
+              button               
+              selected={selectedIndex === 1}
+              key="Syndicate" 
+              onClick={(event) => { setSelectedIndex(1) }}>
+              <ListItemIcon><Rss/></ListItemIcon>
+              <ListItemText primary="Syndicate" />
+            </ListItem>
+          </Link>
+
+        <List> */}
+
       </List>
       </Drawer>
       

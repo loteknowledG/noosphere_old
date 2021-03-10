@@ -1,4 +1,4 @@
-import React, { useState, useGlobal } from 'reactn'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Button, Dialog, Fab, IconButton, ListItem, ListItemIcon, ListItemText, Slide, TextField, Toolbar, Typography } from '@material-ui/core'
 import { Close, Firebase } from 'mdi-material-ui'
@@ -29,7 +29,7 @@ export function Matterealize (props) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [text, setText] = useState('')
-    const [profileToken, setProfileToken] = useGlobal('profileToken')
+    // const [profileToken, setProfileToken] = useGlobal('profileToken')
     function getFileExtension (filename) {
         var re = /(?:\.([^.]+))?$/
         var ext = re.exec(filename)[1];
@@ -68,9 +68,9 @@ export function Matterealize (props) {
             props.handleTeacHer(json)
         }
     }
-    if (profileToken === undefined) {
-        return (<div></div>)
-    } else {
+    // if (profileToken === undefined) {
+    //     return (<div></div>)
+    // } else {
         return (
             <>
                 <ListItem button onClick={handleClickOpen} >
@@ -103,5 +103,5 @@ export function Matterealize (props) {
                 </Dialog>
             </>
         )
-    }
+    // }
 }

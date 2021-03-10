@@ -10,10 +10,10 @@ import streamSaver from 'streamsaver'
 | |\/| ||_|  (_) )\____/ |_|  (_)(_____/ `-'/(  (_)/( __.' 
 '-'  '-'        (__)                       (__)   (_*/     
 export function Magazine(props) {
-    const [load, setLoad] = useState(["https://lh3.googleusercontent.com/_1whFm6BwCQvIzSf-dn5oTmjz6QycDaLluhsBUSsUiwp84NnlflD_S4AVVt-CIQi2rWIHthJvqO-s8X2WA-bdBL2v5N1sxisI6-fDPvsPCZO9dxRc7scH-xBkKBIwIE6uRL6iOtxNHCqSaYUJomqf27rRFFEIEDune9pmBOwC1a6-77t9IWeIt7MM-SimbLChfTzJc9ILu6okMkHyeGyT8Q6vLUkVAx2HQq-Wtx_RAfz8uGV6C2Wx0qSA-lzyz4y0HB-vOWGC6HVXfE41iv1MgblqQg846WzEzK3JPRRSEWDXjHSPn8rQ7gHfQvkUd9ilzSrBJBpUnhPtg9_G94_VbZ4sNtcAQF85G0_k0vgAu3BDTbrU02lifxfXtwud19JdAfV4clVQUX2t4tTA_zdIqcxsbn1T-vWpfyN-E5gYk3VpSxTwJmh7_jZ_0mVEUtUZ8xup4Vdi9gFfidLmuEuJnt_JhyFqNp244CZHmQpTCZa4EgEwMZDH4w_6PMp7uz1aaXpMTHhlh0A6k-2I5acNvFxgsm6J3fIeUD_QRV4fKOKIiL0WH2wxrcaBZDMrMPUcHZmGp_zV5KTiSJ1gOozryZdzj3-GzH9KDTEGJpV4y1sTnkczjbCuCUGdrX-GrRPZCRzOYUl4n_0PDW7425ErbZ3IpVFgffN2qEMAg9gVYN_KZFqmF0-sVCgjep1lOjMhUwZKzmxyAnuGV42ZtL7EuwQhQ"])
+    const [load, setLoad] = useState(["https://lh3.googleusercontent.com/GOYRlavWyXY9xemVNW4-7X2WisO_GNtWSpyENwYnPk3PwwnPXeM8nM-Vruo7sjaYOxGKDPzPiisoU2GV8EeulgtFXIvruPrRpBoIuYr94vDkrzn0BKHeKDNdwZ6saPLQkWuOJdvF-Kx-SDTuL0MOJ8FbwpQCkgaw9ZL6H9mwWl9b3mG8wRmRA6-0mIMST-7HmfDwx9Yn10IjNavYkg63yJoc4k6zl1gpnqh8sw4k8iJkZYUMaiYIYyjVVBOHz2FPYps95_usHa7w3GVML3nTADJ5eW9x867JbKNcPDxFwLLGOKo9ZJMFXDNtv3Em3-vP8YbeNney524HPHeK9iuhxf7zCpc_9i1Z760kOo4UCVLZrKuqP6qZ-akmOisdgZhahVRzGT_-8YFJIopnA2bd1iu98gLxezax9gpwQ6VBl0dIVmNkiP3cQzLHJr7DmdZUKkP3i-kX8-vB3La-Qqox_ZxoDhMk6jeuV-WaAvoNEQll8qHZqGmdAs8SJjHchMkvJJNEuCApi0FBXtw51PnSjnkDmJA5Ecs4vNVasN6RrV0_eQt1_bbt4RDp2mrh8SFZquFoAwJGmWQWeiS5rydU5yZwRSbQTBObKQWxpdhddh4m7CUlCbC1R6GEEzsSVAlvaYCdAwHb0B6FqRburzY-4qjT7NZHmfC43ZNYD0CIPPQFE119qq25fTPoVGphYu5-8F1ipXOGuNnx3y2TCcIi9eLAk3AlmfLRSuYY8VUadooqPJml-eZw-s0F"])
     const [store, setStore] = useState({})
     const [markers, setMarkers] = useState([])
-    const [level, setLevels] = useGlobal()
+    // const [level, setLevels] = useGlobal()
     const handleLoad = (load) => {
         setLoad(load)
     }    
