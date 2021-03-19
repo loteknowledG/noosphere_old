@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/noosphere/static/css/main.26279ff7.chunk.css",
-    "main.js": "/noosphere/static/js/main.0729f565.chunk.js",
-    "main.js.map": "/noosphere/static/js/main.0729f565.chunk.js.map",
+    "main.js": "/noosphere/static/js/main.b4e0eca1.chunk.js",
+    "main.js.map": "/noosphere/static/js/main.b4e0eca1.chunk.js.map",
     "runtime-main.js": "/noosphere/static/js/runtime-main.11a71eaa.js",
     "runtime-main.js.map": "/noosphere/static/js/runtime-main.11a71eaa.js.map",
     "static/css/2.2d17f65d.chunk.css": "/noosphere/static/css/2.2d17f65d.chunk.css",
     "static/js/2.2114ab6b.chunk.js": "/noosphere/static/js/2.2114ab6b.chunk.js",
     "static/js/2.2114ab6b.chunk.js.map": "/noosphere/static/js/2.2114ab6b.chunk.js.map",
     "index.html": "/noosphere/index.html",
-    "precache-manifest.ee4935af29ec707d217a3506da79020e.js": "/noosphere/precache-manifest.ee4935af29ec707d217a3506da79020e.js",
+    "precache-manifest.18c0eb0d7168a4cd863936f8788509aa.js": "/noosphere/precache-manifest.18c0eb0d7168a4cd863936f8788509aa.js",
     "service-worker.js": "/noosphere/service-worker.js",
     "static/css/2.2d17f65d.chunk.css.map": "/noosphere/static/css/2.2d17f65d.chunk.css.map",
     "static/css/main.26279ff7.chunk.css.map": "/noosphere/static/css/main.26279ff7.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.2d17f65d.chunk.css",
     "static/js/2.2114ab6b.chunk.js",
     "static/css/main.26279ff7.chunk.css",
-    "static/js/main.0729f565.chunk.js"
+    "static/js/main.b4e0eca1.chunk.js"
   ]
 }
