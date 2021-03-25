@@ -6,7 +6,7 @@
     user-select: none;   
 }
 
-@keyframes GoUp {
+@keyframes GoDown {
     0% {
         opacity: 1;
     }

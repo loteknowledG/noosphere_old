@@ -10,7 +10,7 @@ import { Syndicate } from './components/Syndicate/Syndicate'
 import { Play } from './components/Play/Play'
 import { Back } from './components/Play/Back'
 import { IO } from './components/IO/IO'
-import './App.css'
+import './App.scss'
 import 'typeface-roboto'
 
 const queryClient = new QueryClient()

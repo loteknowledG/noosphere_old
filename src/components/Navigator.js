@@ -9,7 +9,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import { Link } from 'react-router-dom'
 import CollapseOnScroll from './CollapseOnScroll'
-import SignIn from './SignIn'
+// import SignIn from './IO/SignIn'
 
 const drawerWidth = 240;
 
@@ -130,11 +130,9 @@ export function Navigator() {
 |    Y888   `88__/     `88__/   \_88P  888-_88"  888  888  "88___/  888     "88___/ <br/>
 |                                      888                                          <br/>                      
 </pre>
-<SignIn />
-        </CollapseOnScroll>
+          </CollapseOnScroll>
         </Toolbar>
       </AppBar>
-      
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {

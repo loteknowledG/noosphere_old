@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Button, Popover } from '@material-ui/core'
-import useGlobal from '../store'
+import useGlobal from '../../store'
 import $ from 'jquery'
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +73,7 @@ export function SignIn () {
     function(err) { console.error("Execute error", err); });
   }
   window.gapi.load("client:auth2", function() {
-      window.gapi.auth2.init({client_id: "1001750562670-13tl5gmis7taghhs2608c3rkkfs0ug46.apps.googleusercontent.com"});
+      window.gapi.auth2.init({client_id: "346253512556-9cll30jrl8c77o4d4vk9md0mk94g8sge.apps.googleusercontent.com"});
   });
 
   function onClick (event) {

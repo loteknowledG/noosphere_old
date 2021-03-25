@@ -2,7 +2,7 @@ import React from 'react'
 import useGlobal from '../store'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Card, CardActionArea, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core'
+import { Avatar, Card, CardActionArea, CardHeader, CardMedia, Grid, IconButton, Paper } from '@material-ui/core'
 import BuildIcon from '@material-ui/icons/Build'
 import { Link } from 'react-router-dom'
 // import { Button, Card, CardContent, H6 } from 'ui-neumorphism'
@@ -39,7 +39,7 @@ export function NowPlaying() {
           <Grid container justify="center" spacing={2}>
             {globalState.matrix.map((play, idx) => (
               <Grid key={play.key} item>
-                <Card className={classes.paper}>
+                <Card elevation={7} className={classes.paper}>
                   <CardHeader
                     avatar={
                       <Avatar aria-label="recipe" className={classes.avatar}>

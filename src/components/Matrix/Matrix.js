@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Card, CardMedia, Grid, IconButton, Toolbar } from '@material-ui/core'
+import { Card, CardMedia, Grid } from '@material-ui/core'
 import { ArrowLeft } from 'mdi-material-ui'
 import useGlobal from '../../store'
 import { Back } from './Back'
 import { useHistory } from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: '25px'
   },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(7),
-    right: theme.spacing(7),
+  drag: {
+    position: 'fixed',
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
+    height: '10%',
+    width: '10%',
   },
   media: {
     height: 345,
@@ -60,14 +63,19 @@ const useStyles = makeStyles((theme) => ({
  /   YY   Y888b  C888  888  888   888    888   /Y88b  
 /          Y888b  "88_-888  "88_/ 888    888  /  Y8*/ 
 export function Matrix() {
+  
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   let history = useHistory()
+  if (globalState.matrix.length === 0) {    
+    history.push("/")
+  }
+  const constraintsRef = useRef()
 
   if (globalState.now.play) {
     return (    
       <>
-        <Grid container className={classes.root} spacing={2}>
+        <Grid container className={classes.root} spacing={2} ref={constraintsRef}>
           <Grid item xs={12}>
             <Grid container justify="center" spacing={2}>
               {globalState.now.play.pix.map((pic) => (
@@ -86,6 +94,8 @@ export function Matrix() {
             </Grid>
           </Grid>
         </Grid>
+
+        
         <Back/>
       </>
     )

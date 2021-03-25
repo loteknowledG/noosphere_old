@@ -6,7 +6,7 @@ export const useScript = url => {
 
     script.src = url;
     script.async = true;
-
+    script.defer = true;
     document.body.appendChild(script);
 
     return () => {

@@ -44,7 +44,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: 654,
   },
 }));
 
@@ -160,6 +160,7 @@ export function InloadTabs(props) {
           <Tab label="Collect Nexus" {...a11yProps(0)} />
           <Tab label="Compile HyperText" {...a11yProps(1)} />
           <Tab label="Collate STC" {...a11yProps(2)} />
+          <Tab label="Correlate Sheet" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -190,6 +191,9 @@ export function InloadTabs(props) {
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Dropzone margin="normal" /> 
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          <Button >Sign in</Button>
         </TabPanel>
       </SwipeableViews>
     </div>

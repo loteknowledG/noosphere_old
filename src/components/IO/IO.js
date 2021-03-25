@@ -71,6 +71,7 @@ export function IO () {
       </SpeedDial>      
       <Dialog
         fullScreen={fullScreen}
+        maxWidth={'md'}
         open={dialogOpen}
         onClose={handleDialogClose}
         aria-labelledby="responsive-dialog-title">

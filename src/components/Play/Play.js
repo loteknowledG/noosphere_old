@@ -6,17 +6,15 @@ import { useHistory } from 'react-router-dom'
 import { useWindowDimensions } from  '../../hooks/useWindowDimensions'
 import { Cookie } from './Cookie/Cookie'
 import { motion } from 'framer-motion'
-import { Controller } from './Controller/Controller'
+import { Controller } from './controller/Controller'
 import { useViewport } from 'react-viewport-hooks';
 import { Bases } from './Bases'
+import { Teacher } from './Teacher'
 import { Back } from './Back'
-import useInterval from 'use-interval'
 
-const useStyles = makeStyles((theme) => ({  
-  framer: {
-    height: "calc(90vh)",
-    width: "calc(80vw)"
-  },
+
+
+const useStyles = makeStyles((theme) => ({    
   moment: {
     height: "calc(100vh)",  
   },
@@ -34,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function Play () {  
+  const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const history = useHistory()
   const [progress, setProgress] = React.useState(0)
@@ -41,20 +40,20 @@ export function Play () {
   const { height, width } = useWindowDimensions()
   const { vw, vh } = useViewport({updateOnResize: true})
   const progressRef = useRef(() => {})
-
-  useEffect(() => {
-    progressRef.current = () => {
-      if (progress > 100) {
-        setProgress(0)
-        setBuffer(10)
-      } else {
-        const diff = Math.random() * 10
-        const diff2 = Math.random() * 10
-        setProgress(progress + diff)
-        setBuffer(progress + diff + diff2)
-      }
-    }
-  })
+  const imgRef = useRef(null)
+  // useEffect(() => {
+  //   progressRef.current = () => {
+  //     if (progress > 100) {
+  //       setProgress(0)
+  //       setBuffer(10)
+  //     } else {
+  //       const diff = Math.random() * 10
+  //       const diff2 = Math.random() * 10
+  //       setProgress(progress + diff)
+  //       setBuffer(progress + diff + diff2)
+  //     }
+  //   }
+  // })
   
   useEffect(() => {
     const timer = setInterval(() => {
@@ -69,11 +68,11 @@ export function Play () {
     history.push("/")
   }
 
-  const classes = useStyles();
+  
   const [momentIdx, setMomentIdx] = useState(0)
   const [monentIdxs, setMomentIdxs] = useState([0, 1])
   const [ppp, setPpp] = useState(0)
-  const constraintsRef = useRef();  
+  const constraintsRef = useRef()
 
   function handlePP(pp) {
     setPpp(ppp + pp) 
@@ -84,27 +83,30 @@ export function Play () {
     }    
   }
 
-
+  
 
   return (
     <>      
       <Grid container justify="center" className={classes.grid} ref={constraintsRef}>
-        <Card>
+        <Card id="card">
           <LinearProgress variant="buffer" value={progress} valueBuffer={buffer} />
-          <CardActionArea >
-            <Cookie handlePP={(pp) => handlePP(pp)}> 
-            <img alt="" 
-              className={classes.moment} 
-              src={globalState.now.play.pix[momentIdx].src}
-            />                            
-            </Cookie>
+          <CardActionArea >            
+              <Cookie handlePP={(pp) => handlePP(pp)}> 
+                <img alt="" 
+                  className={classes.moment} 
+                  src={globalState.now.play.pix[momentIdx].src}
+                  ref={imgRef}
+                />                                       
+              </Cookie>            
           </CardActionArea>          
-        </Card>        
+        </Card>      
       </Grid>
+      
       <motion.div className={classes.drag} drag dragConstraints={constraintsRef} >
         <Controller ppp={ppp} />
-      </motion.div>    
+      </motion.div>   
       <Back />  
+      
     </>
   )
 }
