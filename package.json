@@ -21,7 +21,6 @@
     "autoprefixer": "^10.2.3",
     "autosuggest-highlight": "^3.1.1",
     "classnames": "^2.2.6",
-    "clickspark.js": "^1.16.0",
     "compass-mixins": "^0.12.10",
     "cors-anywhere": "^0.4.3",
     "file-saver": "^2.0.5",
