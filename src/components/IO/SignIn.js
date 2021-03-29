@@ -90,7 +90,6 @@ export function SignIn () {
   }
 
 
-  console.log(!$.isEmptyObject(globalState.profileToken))
   if (!$.isEmptyObject(globalState.profileToken)) {
 
     // console.log(readFile('matrix.json'))
@@ -118,7 +117,6 @@ export function SignIn () {
       </>
     )
   } else {
-    console.log('black bitch')
     return (      
       <Button onClick={()=>{ authenticate().then(loadClient) }}>Sign In</Button>
     )
