@@ -4,16 +4,7 @@ import { Avatar, Button, Popover } from '@material-ui/core'
 import useGlobal from '../../store'
 import $ from 'jquery'
 
-const useStyles = makeStyles((theme) => ({
-  signIn: {
-    position: 'fixed',
-    top: theme.spacing(3),
-    right: theme.spacing(3),
-  }
-}))
-
 export function SignIn () {    
-  const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const [globalState, globalActions] = useGlobal()
   const open = Boolean(anchorEl)
@@ -98,6 +89,8 @@ export function SignIn () {
     return request; //for batch request
   }
 
+
+  console.log(!$.isEmptyObject(globalState.profileToken))
   if (!$.isEmptyObject(globalState.profileToken)) {
 
     // console.log(readFile('matrix.json'))
@@ -105,11 +98,11 @@ export function SignIn () {
 
     return (
       <>
-        <Avatar className={classes.signIn} src={(globalState.profileToken.Pt && globalState.profileToken.Pt.QK) || (globalState.profileToken.Tt && globalState.profileToken.Tt.SK) || (globalState.profileToken.Qt && globalState.profileToken.Qt.MK)} onClick={ onClick} /> 
+        <Avatar src={(globalState.profileToken.Pt && globalState.profileToken.Pt.QK) || (globalState.profileToken.Tt && globalState.profileToken.Tt.SK) || (globalState.profileToken.Qt && globalState.profileToken.Qt.MK)} onClick={ onClick} /> 
         <Popover            
           open={open}
           anchorEl={anchorEl}
-          className={classes.popup}
+          // className={classes.popup}
           onClose={handleClose}
           anchorOrigin={{
             vertical: 'bottom',
@@ -125,9 +118,9 @@ export function SignIn () {
       </>
     )
   } else {
-
+    console.log('black bitch')
     return (      
-      <Button className={classes.signIn} onClick={()=>{ authenticate().then(loadClient) }}>Sign In</Button>
+      <Button onClick={()=>{ authenticate().then(loadClient) }}>Sign In</Button>
     )
   }
 }

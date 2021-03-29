@@ -157,11 +157,10 @@ export function Navigator() {
           {text: 'Syndicate', icon: <Rss/>},
           {text: 'Safe', icon: <SafeSquareOutline />}
         ].map((item, idx) => (
-          <Link to={"/" + item.text} style={{ textDecoration: 'none' }}>
+          <Link key={item.text}  to={"/" + item.text} style={{ textDecoration: 'none' }}>
             <ListItem 
               button               
               selected={selectedIndex === idx}
-              key={item.text} 
               onClick={(event) => { setSelectedIndex(idx) }}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>

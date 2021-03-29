@@ -7,6 +7,7 @@ import {useDropzone} from 'react-dropzone'
 import useGlobal from '../../store'
 import { useHistory } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import { SignIn } from './SignIn'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     width: 654,
-  },
+  },  
 }));
 
 export function InloadTabs(props) {
@@ -155,8 +156,7 @@ export function InloadTabs(props) {
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"
-          aria-label="full width tabs example"
-        >
+          aria-label="full width tabs example">
           <Tab label="Collect Nexus" {...a11yProps(0)} />
           <Tab label="Compile HyperText" {...a11yProps(1)} />
           <Tab label="Collate STC" {...a11yProps(2)} />
@@ -166,8 +166,7 @@ export function InloadTabs(props) {
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
-        onChangeIndex={handleChangeIndex}
-      >
+        onChangeIndex={handleChangeIndex} >
         <TabPanel value={value} index={0} dir={theme.direction}>
           <TextField 
             id="outlined-search" 
@@ -192,8 +191,8 @@ export function InloadTabs(props) {
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Dropzone margin="normal" /> 
         </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-          <Button >Sign in</Button>
+        <TabPanel value={value} index={3} dir={theme.direction} >          
+          <SignIn /> 
         </TabPanel>
       </SwipeableViews>
     </div>
