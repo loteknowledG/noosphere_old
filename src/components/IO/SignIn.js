@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, Popover, TextField } from '@material-ui/core'
 import useGlobal from '../../store'
@@ -9,7 +9,7 @@ export function SignIn () {
   const [globalState, globalActions] = useGlobal()
   const open = Boolean(anchorEl)
   const [sheetIdDialogOpen, setSheetIdDialogOpen] = React.useState(false);
-
+  let sheetId = ""
   // function authenticate() {
   //   return window.gapi.auth2.getAuthInstance()
   //       .signIn({scope: "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/drive.readonly"})
@@ -89,6 +89,52 @@ export function SignIn () {
     setAnchorEl(null);
   }
 
+  const handleSubscribe = (sheetId) => {
+    handleClose()
+    // console.log(sheetId);
+    // https://spreadsheets.google.com/feeds/cells/YOURGOOGLESHEETCODE/SHEETPAGENUMBER/public/full?alt=json
+    // fetch('https://spreadsheets.google.com/feeds/cells/1fDA_e9hOI3wsXKB4cW_pElrZL0Lh0aun_cV0BZ3Qhj8/1/public/full?alt=json').then(
+    //   res =>
+    //   res.json()
+    // )
+ 
+    // getSheet()
+
+    setSheetIdDialogOpen(false)
+    return window.gapi.client.sheets.spreadsheets.get({
+      "spreadsheetId": '1fDA_e9hOI3wsXKB4cW_pElrZL0Lh0aun_cV0BZ3Qhj8',
+      "includeGridData": true
+    })
+    .then(function(response) {
+          // Handle the results here (response.result has the parsed body).
+      console.log("Response", response);
+    },
+    function(err) { console.error("Execute error", err); });
+  }
+
+  function getSheet() {
+    window.gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: '1fDA_e9hOI3wsXKB4cW_pElrZL0Lh0aun_cV0BZ3Qhj8',
+      range: 'Sheet1!A:A',
+    }).then(function(response) {
+      console.log(response)
+      // var range = response.result;
+      // if (range.values.length > 0) {
+      //   appendPre('Name, Major:');
+      //   for (i = 0; i < range.values.length; i++) {
+      //     var row = range.values[i];
+      //     // Print columns A and E, which correspond to indices 0 and 4.
+      //     appendPre(row[0] + ', ' + row[4]);
+      //   }
+      // } else {
+      //   appendPre('No data found.');
+      // }
+    }, function(response) {
+      // appendPre('Error: ' + response.result.error.message);
+    });
+  }
+
+
   const readFile = (fileId,callback) => {
     var request = window.gapi.client.drive.files.get({
       fileId: fileId,
@@ -141,6 +187,7 @@ export function SignIn () {
               To subscribe to the google spreadsheet, please enter sheet Id here. 
             </DialogContentText>
             <TextField
+              inputRef={(c) => {sheetId = c}}
               autoFocus
               margin="dense"
               id="sheetId"
@@ -152,7 +199,7 @@ export function SignIn () {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={() => handleSubscribe(sheetId)} color="primary">
               Subscribe
             </Button>
           </DialogActions>
